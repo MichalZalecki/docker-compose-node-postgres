@@ -1,0 +1,35 @@
+{
+  "name": "docker-compose-node-postgres",
+  "version": "1.0.0",
+  "description": "How to setup Node.js and Postgres with Docker",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently -k \"npm run build:watch\" \"npm run start:dev\"",
+    "start": "node dist/index.js",
+    "start:dev": "nodemon --inspect=0.0.0.0:9229 dist/index.js",
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichalZalecki/docker-compose-node-postgres.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichalZalecki/docker-compose-node-postgres/issues"
+  },
+  "homepage": "https://github.com/MichalZalecki/docker-compose-node-postgres#readme",
+  "dependencies": {
+    "@types/express": "^4.11.1",
+    "@types/node": "^9.6.1",
+    "express": "^4.16.3",
+    "typescript": "^2.8.1"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.17.3"
+  }
+}
