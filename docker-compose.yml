@@ -8,7 +8,8 @@ services:
     ports:
       - "3000:3000"
       - "9229:9229"
+
   postgres:
-    image: postgres:9.6.8-alpine
+    image: postgres:11.2-alpine
     environment:
       POSTGRES_PASSWORD: postgres
