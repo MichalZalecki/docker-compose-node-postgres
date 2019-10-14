@@ -13,3 +13,8 @@ services:
     image: postgres:11.2-alpine
     environment:
       POSTGRES_PASSWORD: postgres
+
+  client:
+    build: client
+    depends_on:
+      - app
