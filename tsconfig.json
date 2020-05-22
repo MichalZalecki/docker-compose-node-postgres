@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["node", "express", "sequelize"],
     "target": "es5",
     "module": "commonjs",
     "sourceMap": true,
@@ -7,7 +8,5 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "include": [
-    "src/**/*.ts"
-  ]
+  "include": ["src/**/*.ts"]
 }
