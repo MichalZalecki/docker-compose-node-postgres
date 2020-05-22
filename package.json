@@ -30,6 +30,7 @@
     "express": "^4.16.4",
     "pg": "^7.9.0",
     "sequelize": "^4.44.4",
+    "sequelize-cli": "^5.5.1",
     "typescript": "^3.4.3"
   },
   "devDependencies": {

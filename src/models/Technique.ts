@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize'
 import { SequelizeAttributes } from '../typings/SequelizeAttributes'
 
-export interface IngredientAttributes {
+export interface TechniqueAttributes {
   id?: string
   name: string
   title: string
@@ -12,13 +12,13 @@ export interface IngredientAttributes {
   updatedAt?: Date
 }
 
-export interface IngredientInstance extends Sequelize.Instance<IngredientAttributes>, IngredientAttributes {}
+export interface TechniqueInstance extends Sequelize.Instance<TechniqueAttributes>, TechniqueAttributes {}
 
-export const IngredientFactory = (
+export const TechniqueFactory = (
   sequelize: Sequelize.Sequelize,
   DataTypes: Sequelize.DataTypes
-): Sequelize.Model<IngredientInstance, IngredientAttributes> => {
-  const attributes: SequelizeAttributes<IngredientAttributes> = {
+): Sequelize.Model<TechniqueInstance, TechniqueAttributes> => {
+  const attributes: SequelizeAttributes<TechniqueAttributes> = {
     name: {
       type: DataTypes.STRING,
     },
@@ -36,5 +36,5 @@ export const IngredientFactory = (
     },
   }
 
-  return sequelize.define<IngredientInstance, IngredientAttributes>('Ingredient', attributes)
+  return sequelize.define<TechniqueInstance, TechniqueAttributes>('Technique', attributes)
 }

@@ -1,0 +1,29 @@
+{
+  "development": {
+    "username": "root",
+    "password": "postgres",
+    "database": "database_development",
+    "host": "127.0.0.1",
+    "port": "9229",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "port": "9229",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "port": "9229",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}
