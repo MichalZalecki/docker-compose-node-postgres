@@ -26,7 +26,7 @@ export const TechniqueFactory = (
       type: DataTypes.STRING,
     },
     description: {
-      type: DataTypes.STRING(500),
+      type: DataTypes.STRING(700),
     },
     temperature: {
       type: DataTypes.NUMBER,

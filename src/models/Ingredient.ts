@@ -5,7 +5,8 @@ export interface IngredientAttributes {
   id?: string
   name: string
   title: string
-  category: string
+  description: string
+  category?: string
   createdAt?: Date
   updatedAt?: Date
 }
@@ -19,12 +20,18 @@ export const IngredientFactory = (
   const attributes: SequelizeAttributes<IngredientAttributes> = {
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     title: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
-    category: {
-      type: DataTypes.STRING,
+    description: {
+      type: DataTypes.STRING(700),
+      allowNull: true,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
     },
   }
 
