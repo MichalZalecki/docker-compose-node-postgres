@@ -29,12 +29,25 @@ export const TechniqueFactory = (
       type: DataTypes.STRING(700),
     },
     temperature: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.FLOAT,
     },
     duration: {
       type: DataTypes.STRING,
     },
   }
 
-  return sequelize.define<TechniqueInstance, TechniqueAttributes>('Technique', attributes)
+  const Technique = sequelize.define<TechniqueInstance, TechniqueAttributes>('Technique', attributes, {
+    tableName: 'Technique',
+  })
+
+  Technique.associate = (models): void => {
+    Technique.belongsToMany(models.Recipe, {
+      through: 'TechniqueIngredients',
+      as: 'techniques',
+      foreignKey: 'ingredientId',
+      otherKey: 'recipeId',
+    })
+  }
+
+  return Technique
 }

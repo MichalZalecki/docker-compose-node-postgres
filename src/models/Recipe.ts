@@ -5,6 +5,7 @@ export interface RecipeAttributes {
   id?: string
   name: string
   title: string
+  author: string
   description: string
   updatedAt?: Date
 }
@@ -28,10 +29,16 @@ export const RecipeFactory = (
       type: DataTypes.STRING(700),
       allowNull: true,
     },
+    author: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     updatedAt: {
       type: DataTypes.DATE,
     },
   }
 
-  return sequelize.define<RecipeInstance, RecipeAttributes>('Recipe', attributes)
+  return sequelize.define<RecipeInstance, RecipeAttributes>('Recipe', attributes, {
+    tableName: 'Recipe',
+  })
 }

@@ -35,5 +35,18 @@ export const IngredientFactory = (
     },
   }
 
-  return sequelize.define<IngredientInstance, IngredientAttributes>('Ingredient', attributes)
+  const Ingredient = sequelize.define<IngredientInstance, IngredientAttributes>('Ingredient', attributes, {
+    tableName: 'Ingredient',
+  })
+
+  Ingredient.associate = (models): void => {
+    Ingredient.belongsToMany(models.Recipe, {
+      through: 'RecipeIngredient',
+      as: 'ingredients',
+      foreignKey: 'ingredientId',
+      otherKey: 'recipeId',
+    })
+  }
+
+  return Ingredient
 }

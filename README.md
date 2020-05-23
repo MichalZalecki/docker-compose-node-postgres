@@ -13,7 +13,7 @@ I've put together an article which explains most of the code from this repo: [Do
 ## Test
 
 ```sh
-curl http://localhost:3000/ping
+curl http://localhost:8080/ping
 # {"environment":"development","database":"up"}
 ```
 

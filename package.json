@@ -9,6 +9,8 @@
     "start:dev": "nodemon --inspect=0.0.0.0:9229 dist/index.js",
     "build": "tsc",
     "build:watch": "tsc -w",
+    "migratations": "npx sequelize db:migrate",
+    "migratations:undo": "npx sequelize db:migrate:undo:all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

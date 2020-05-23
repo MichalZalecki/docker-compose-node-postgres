@@ -3,30 +3,37 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable(
-      'Recipe',
+      'RecipeTechnique',
       {
-        id: {
+        recipeId: {
           type: Sequelize.UUID,
-          defaultValue: Sequelize.UUIDV4,
-          primaryKey: true,
+          references: {
+            model: 'Recipe',
+            key: 'id',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',
           unique: true,
           allowNull: false,
         },
-        name: {
+        techniqueId: {
+          type: Sequelize.UUID,
+          references: {
+            model: 'Technique',
+            key: 'id',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',
+          unique: true,
+          allowNull: false,
+        },
+        amount: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        title: {
+        temperature: {
           type: Sequelize.STRING,
           allowNull: false,
-        },
-        description: {
-          type: Sequelize.STRING(700),
-          allowNull: true,
-        },
-        author: {
-          type: Sequelize.STRING,
-          allowNull: true,
         },
         createdAt: {
           type: Sequelize.DATE,
@@ -37,11 +44,11 @@ module.exports = {
           type: Sequelize.DATE,
         },
       },
-      { tableName: 'Recipe' }
+      { freezeTableName: true, tableName: 'RecipeTechnique' }
     )
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Recipe')
+    return queryInterface.dropTable('RecipeTechnique')
   },
 }
