@@ -20,6 +20,10 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false,
         },
+        duration: {
+          type: Sequelize.FLOAT,
+          allowNull: true,
+        },
         description: {
           type: Sequelize.STRING(700),
           allowNull: false,

@@ -83,6 +83,7 @@ export const IngredientFactory = (
     Ingredient.belongsToMany(models.Recipe, {
       through: models.RecipeIngredient,
       foreignKey: 'ingredientId',
+      as: 'recipes',
       otherKey: 'recipeId',
     })
   }

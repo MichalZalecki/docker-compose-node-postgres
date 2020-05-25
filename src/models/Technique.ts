@@ -7,7 +7,7 @@ export interface TechniqueAttributes {
   title: string
   description: string
   duration: number
-  temperature?: number
+  idealTemperature?: number
   createdAt?: Date
   updatedAt?: Date
 }
@@ -33,7 +33,7 @@ export const TechniqueFactory = (
     description: {
       type: DataTypes.STRING(700),
     },
-    temperature: {
+    idealTemperature: {
       type: DataTypes.FLOAT,
     },
     duration: {
@@ -47,10 +47,10 @@ export const TechniqueFactory = (
 
   Technique.associate = (models): void => {
     Technique.belongsToMany(models.Recipe, {
-      through: 'TechniqueRecipe',
+      through: models.RecipeTechnique,
+      foreignKey: 'techniqueId',
       as: 'techniques',
-      foreignKey: 'recipeId',
-      otherKey: 'techniqueId',
+      otherKey: 'recipeId',
     })
   }
 

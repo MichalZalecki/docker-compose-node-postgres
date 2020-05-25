@@ -10,6 +10,5 @@ RUN npm ci
 
 COPY . /home/app
 
-RUN npm run build
+RUN npm run dev
 
-CMD ./scripts/start.sh

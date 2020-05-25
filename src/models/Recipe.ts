@@ -1,6 +1,8 @@
 import sequelize, * as Sequelize from 'sequelize'
 import { SequelizeAttributes } from '../typings/SequelizeAttributes'
 import { IngredientInstance, IngredientAttributes } from './Ingredient'
+import { TechniqueInstance, TechniqueAttributes } from './Technique'
+import { RecipeTechniqueAttributes } from './RecipeTechnique'
 export interface RecipeAttributes {
   id?: string
   name: string
@@ -42,6 +44,33 @@ export interface RecipeInstance extends Sequelize.Instance<RecipeAttributes>, Re
   hasIngredient: Sequelize.BelongsToManyHasAssociationMixin<IngredientInstance, IngredientInstance['id']>
   hasIngredients: Sequelize.BelongsToManyHasAssociationsMixin<IngredientInstance, IngredientInstance['id']>
   countIngredients: Sequelize.BelongsToManyCountAssociationsMixin
+
+  getTechniques: Sequelize.BelongsToManyGetAssociationsMixin<TechniqueInstance>
+  setTechniques: Sequelize.BelongsToManySetAssociationsMixin<
+    TechniqueInstance,
+    TechniqueInstance['id'],
+    RecipeTechniqueAttributes
+  >
+  addTechniques: Sequelize.BelongsToManyAddAssociationsMixin<
+    TechniqueInstance,
+    TechniqueInstance['id'],
+    RecipeTechniqueAttributes
+  >
+  addTechnique: Sequelize.BelongsToManyAddAssociationMixin<
+    TechniqueInstance,
+    TechniqueInstance['id'],
+    RecipeTechniqueAttributes
+  >
+  createTechnique: Sequelize.BelongsToManyCreateAssociationMixin<
+    TechniqueAttributes,
+    TechniqueInstance,
+    RecipeTechniqueAttributes
+  >
+  removeTechnique: Sequelize.BelongsToManyRemoveAssociationMixin<TechniqueInstance, TechniqueInstance['id']>
+  removeTechniques: Sequelize.BelongsToManyRemoveAssociationsMixin<TechniqueInstance, TechniqueInstance['id']>
+  hasTechnique: Sequelize.BelongsToManyHasAssociationMixin<TechniqueInstance, TechniqueInstance['id']>
+  hasTechniques: Sequelize.BelongsToManyHasAssociationsMixin<TechniqueInstance, TechniqueInstance['id']>
+  countTechniques: Sequelize.BelongsToManyCountAssociationsMixin
 }
 
 export const RecipeFactory = (
@@ -83,7 +112,15 @@ export const RecipeFactory = (
     Recipe.belongsToMany(models.Ingredient, {
       through: 'RecipeIngredient',
       foreignKey: 'recipeId',
+      as: 'ingredients',
       otherKey: 'ingredientId',
+    })
+
+    Recipe.belongsToMany(models.Technique, {
+      through: 'RecipeTechnique',
+      foreignKey: 'recipeId',
+      as: 'techniques',
+      otherKey: 'techniqueId',
     })
   }
   return Recipe
