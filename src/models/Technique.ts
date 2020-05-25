@@ -19,6 +19,11 @@ export const TechniqueFactory = (
   DataTypes: Sequelize.DataTypes
 ): Sequelize.Model<TechniqueInstance, TechniqueAttributes> => {
   const attributes: SequelizeAttributes<TechniqueAttributes> = {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
     name: {
       type: DataTypes.STRING,
     },
@@ -42,10 +47,10 @@ export const TechniqueFactory = (
 
   Technique.associate = (models): void => {
     Technique.belongsToMany(models.Recipe, {
-      through: 'TechniqueIngredients',
+      through: 'TechniqueRecipe',
       as: 'techniques',
-      foreignKey: 'ingredientId',
-      otherKey: 'recipeId',
+      foreignKey: 'recipeId',
+      otherKey: 'techniqueId',
     })
   }
 

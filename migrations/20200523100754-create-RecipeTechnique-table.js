@@ -14,6 +14,7 @@ module.exports = {
           onUpdate: 'CASCADE',
           onDelete: 'SET NULL',
           unique: true,
+          primaryKey: true,
           allowNull: false,
         },
         techniqueId: {
@@ -25,23 +26,21 @@ module.exports = {
           onUpdate: 'CASCADE',
           onDelete: 'SET NULL',
           unique: true,
-          allowNull: false,
+          primaryKey: true,
+          allowNull: true,
         },
-        amount: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
-        temperature: {
-          type: Sequelize.STRING,
+        idealTemperature: {
+          type: Sequelize.FLOAT,
           allowNull: false,
         },
         createdAt: {
           type: Sequelize.DATE,
-          defaultValue: Sequelize.NOW,
           allowNull: false,
         },
         updatedAt: {
           type: Sequelize.DATE,
+          defaultValue: Sequelize.NOW,
+          allowNull: true,
         },
       },
       { freezeTableName: true, tableName: 'RecipeTechnique' }

@@ -13,7 +13,7 @@ module.exports = {
           },
           onUpdate: 'CASCADE',
           onDelete: 'SET NULL',
-          unique: true,
+          primaryKey: true,
           allowNull: false,
         },
         ingredientId: {
@@ -24,14 +24,10 @@ module.exports = {
           },
           onUpdate: 'CASCADE',
           onDelete: 'SET NULL',
-          unique: true,
+          primaryKey: true,
           allowNull: false,
         },
         amount: {
-          type: Sequelize.FLOAT,
-          allowNull: false,
-        },
-        temperature: {
           type: Sequelize.FLOAT,
           allowNull: false,
         },
@@ -42,6 +38,7 @@ module.exports = {
         },
         updatedAt: {
           type: Sequelize.DATE,
+          allowNull: true,
         },
       },
       {
