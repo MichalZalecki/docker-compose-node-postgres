@@ -8,17 +8,16 @@ const PORT = process.env.PORT || 8080
 const app = express()
 const db = createModels(config as Env)
 app.get('/ping', async (req, res) => {
-  // console.log(newRecipe)
-  const t = await db.Technique.create({
+  const newTechnique = await db.Technique.create({
     name: 'arrimina',
     description: 'firria',
-    idealTemperature: 22,
+    standardTemperature: 22,
     duration: 33,
     title: 'amuni',
   })
 
-  const oneRec = await db.Recipe.findOne()
-  await oneRec?.addTechnique(t)
+  const oneRec = await db.Recipe.create({ name: 'petro', title: 'racina', description: 'schifio', author: 'maria' })
+  await oneRec?.addTechnique(newTechnique, { through: { idealTemperature: 232 } })
   const allRecipes = await db.Recipe.findAll({
     include: [
       {

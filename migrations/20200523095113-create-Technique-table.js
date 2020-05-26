@@ -28,7 +28,7 @@ module.exports = {
           type: Sequelize.STRING(700),
           allowNull: false,
         },
-        idealTemperature: {
+        standardTemperature: {
           type: Sequelize.FLOAT,
           allowNull: true,
         },

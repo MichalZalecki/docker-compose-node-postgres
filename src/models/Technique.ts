@@ -7,7 +7,7 @@ export interface TechniqueAttributes {
   title: string
   description: string
   duration: number
-  idealTemperature?: number
+  standardTemperature?: number
   createdAt?: Date
   updatedAt?: Date
 }
@@ -33,7 +33,7 @@ export const TechniqueFactory = (
     description: {
       type: DataTypes.STRING(700),
     },
-    idealTemperature: {
+    standardTemperature: {
       type: DataTypes.FLOAT,
     },
     duration: {

@@ -4,9 +4,9 @@
   "description": "How to setup Node.js and Postgres with Docker",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently -k \"npm run build:watch\" \"npm run start:dev\"",
+    "dev": "concurrently \"npm run build:watch\" \"npm run start:dev\"",
     "start": "node dist/index.js",
-    "start:dev": "nodemon --inspect=0.0.0.0:9229 dist/index.js",
+    "start:dev": "nodemon dist/index.js",
     "build": "tsc",
     "build:watch": "tsc -w",
     "migratations": "npx sequelize db:migrate",
@@ -33,6 +33,7 @@
     "pg": "^7.9.0",
     "sequelize": "^4.38.0",
     "sequelize-cli": "^5.5.1",
+    "typed-error": "^3.2.0",
     "typescript": "^3.4.3",
     "uuid": "^8.1.0"
   },

@@ -1,8 +1,8 @@
 import sequelize, * as Sequelize from 'sequelize'
 import { SequelizeAttributes } from '../typings/SequelizeAttributes'
 export interface RecipeTechniqueAttributes {
-  recipeId: string
-  techniqueId: string
+  recipeId?: string
+  techniqueId?: string
   idealTemperature: number
   createdAt?: Date
   updatedAt?: Date
