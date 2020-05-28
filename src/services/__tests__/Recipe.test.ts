@@ -4,7 +4,7 @@ import { RecipeIngredientApiInterface } from '../Recipe'
 
 import { createModels } from '../../models'
 import config from '../../../config/config.json'
-import { IngredientApiInterface } from '../Ingredient'
+import { IngredientCreateInterface } from '../Ingredient'
 import { IngredientInstance } from '../../models/Ingredient'
 const db = createModels(config)
 

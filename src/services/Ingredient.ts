@@ -2,12 +2,18 @@ import { DBInterface } from '../typings/DbInterface'
 import { IngredientInstance } from '../models/Ingredient'
 import ErrorGenerator from '../error'
 
-type ingredientQueryParams = keyof IngredientInstance
-
-export interface IngredientApiInterface {
+export interface IngredientCreateInterface {
+  id?: string
   name: string
   title: string
   description: string
+}
+
+interface ingredientFindInterface {
+  id?: string
+  name?: string
+  title?: string
+  description?: string
 }
 
 export default class Ingredient {
@@ -17,7 +23,7 @@ export default class Ingredient {
     this.db = db
   }
 
-  async find(params: ingredientQueryParams): Promise<IngredientInstance[]> {
+  async find(params?: ingredientFindInterface): Promise<IngredientInstance[]> {
     try {
       const ingredientFound = await this.db.Ingredient.findAll({ where: params })
       return ingredientFound
@@ -26,7 +32,7 @@ export default class Ingredient {
     }
   }
 
-  async create(ingredients: IngredientApiInterface[]): Promise<IngredientInstance[]> {
+  async create(ingredients: IngredientCreateInterface[]): Promise<IngredientInstance[]> {
     if (!ingredients || !ingredients.length) {
       throw new ErrorGenerator('Server.internal')
     }
