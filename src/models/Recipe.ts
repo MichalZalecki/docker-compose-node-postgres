@@ -106,18 +106,19 @@ export const RecipeFactory = (
   }
   const Recipe = sequelize.define<RecipeInstance, RecipeAttributes>('Recipe', attributes, {
     tableName: 'Recipe',
+    freezeTableName: true,
   })
 
   Recipe.associate = (models): void => {
     Recipe.belongsToMany(models.Ingredient, {
-      through: 'RecipeIngredient',
+      through: models.RecipeIngredient,
       foreignKey: 'recipeId',
       as: 'ingredients',
       otherKey: 'ingredientId',
     })
 
     Recipe.belongsToMany(models.Technique, {
-      through: 'RecipeTechnique',
+      through: models.RecipeTechnique,
       foreignKey: 'recipeId',
       as: 'techniques',
       otherKey: 'techniqueId',

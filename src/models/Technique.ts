@@ -43,6 +43,7 @@ export const TechniqueFactory = (
 
   const Technique = sequelize.define<TechniqueInstance, TechniqueAttributes>('Technique', attributes, {
     tableName: 'Technique',
+    freezeTableName: true,
   })
 
   Technique.associate = (models): void => {

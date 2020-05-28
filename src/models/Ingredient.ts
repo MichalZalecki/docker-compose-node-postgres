@@ -77,6 +77,7 @@ export const IngredientFactory = (
 
   const Ingredient = sequelize.define<IngredientInstance, IngredientAttributes>('Ingredient', attributes, {
     tableName: 'Ingredient',
+    freezeTableName: true,
   })
 
   Ingredient.associate = (models): void => {

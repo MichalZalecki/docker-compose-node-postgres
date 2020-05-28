@@ -45,6 +45,7 @@ export const RecipeIngredientFactory = (
     attributes,
     {
       tableName: 'RecipeIngredient',
+      freezeTableName: true,
     }
   )
 

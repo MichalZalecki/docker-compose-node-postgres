@@ -1,12 +1,10 @@
 import express from 'express'
 import { createModels } from './models'
-const config = require('../config/config.json')
-
-import { Env } from './typings/Env'
+import config from '../config/config.json'
 
 const PORT = process.env.PORT || 8080
 const app = express()
-const db = createModels(config as Env)
+const db = createModels(config)
 app.get('/ping', async (req, res) => {
   const newTechnique = await db.Technique.create({
     name: 'arrimina',

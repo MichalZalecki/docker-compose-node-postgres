@@ -11,7 +11,7 @@
     "build:watch": "tsc -w",
     "migratations": "npx sequelize db:migrate",
     "migratations:undo": "npx sequelize db:migrate:undo:all",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -38,9 +38,12 @@
     "uuid": "^8.1.0"
   },
   "devDependencies": {
-    "faker": "^4.1.0",
     "@types/faker": "^4.1.12",
+    "@types/jest": "^25.2.3",
     "concurrently": "^4.1.0",
-    "nodemon": "^1.18.11"
+    "faker": "^4.1.0",
+    "jest": "^26.0.1",
+    "nodemon": "^1.18.11",
+    "ts-jest": "^26.0.0"
   }
 }
