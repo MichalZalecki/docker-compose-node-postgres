@@ -9,6 +9,7 @@ const dummyIngredient = {
   title: 'flour',
   description: 'white dust',
 }
+
 afterEach(async () => {
   await db.Ingredient.destroy({
     where: {},

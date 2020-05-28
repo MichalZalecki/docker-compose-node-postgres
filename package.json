@@ -9,9 +9,10 @@
     "start:dev": "nodemon dist/index.js",
     "build": "tsc",
     "build:watch": "tsc -w",
-    "migratations": "npx sequelize db:migrate",
-    "migratations:undo": "npx sequelize db:migrate:undo:all",
-    "test": "jest --watch"
+    "migrations": "npx sequelize db:migrate",
+    "migrations:test": "npx sequelize db:migrate --env test",
+    "migrations:undo": "npx sequelize db:migrate:undo:all",
+    "test": "./scripts/test.sh"
   },
   "repository": {
     "type": "git",
