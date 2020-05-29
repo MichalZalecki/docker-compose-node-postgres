@@ -14,7 +14,7 @@ export interface RecipeIngredientApiInterface {
   amount: number
 }
 interface RecipeApiInterface {
-  name: string
+  key: string
   title: string
   description: string
   author: string
@@ -32,8 +32,8 @@ export default class Recipe {
   constructor(db: DBInterface) {
     this.db = db
     this.attributes = {
-      ingredients: ['name', 'title', 'description'],
-      techniques: ['name', 'title', 'description', 'duration', 'standardTemperature', 'videoLink'],
+      ingredients: ['key', 'title', 'description'],
+      techniques: ['key', 'title', 'description', 'duration', 'standardTemperature', 'videoLink'],
     }
   }
 
@@ -41,6 +41,7 @@ export default class Recipe {
     try {
       const recipeFound = await this.db.Recipe.findAll({
         where: params,
+        raw: true,
         include: [
           {
             model: this.db.Ingredient,
@@ -54,6 +55,7 @@ export default class Recipe {
           },
         ],
       })
+      console.log(recipeFound)
       return recipeFound
     } catch (e) {
       throw new ErrorGenerator('Server.internal', e)
@@ -85,7 +87,7 @@ export default class Recipe {
   async create(recipe: RecipeApiInterface): Promise<RecipeInstance> {
     try {
       const newRecipe = await this.db.Recipe.create({
-        name: recipe.name,
+        key: recipe.key,
         title: recipe.title,
         description: recipe.description,
         author: recipe.author,

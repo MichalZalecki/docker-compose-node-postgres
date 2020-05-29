@@ -3,7 +3,7 @@
 // const getRandomRecipe = () => {
 //   return {
 //     id: faker.random.uuid(),
-//     name: faker.company.catchPhraseAdjective(),
+//     key: faker.company.catchPhraseAdjective(),
 //     title: faker.company.catchPhraseAdjective(),
 //     author: faker.company.catchPhraseAdjective(),
 //     description: faker.company.catchPhraseAdjective(),

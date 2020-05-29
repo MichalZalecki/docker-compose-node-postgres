@@ -3,11 +3,12 @@ import { SequelizeAttributes } from '../typings/SequelizeAttributes'
 
 export interface TechniqueAttributes {
   id?: string
-  name: string
+  key: string
   title: string
   description: string
   duration: number
   standardTemperature?: number
+  videoLink?: string
   createdAt?: Date
   updatedAt?: Date
 }
@@ -24,17 +25,24 @@ export const TechniqueFactory = (
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    name: {
+    key: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     title: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING(700),
+      allowNull: false,
     },
     standardTemperature: {
       type: DataTypes.FLOAT,
+    },
+    videoLink: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     duration: {
       type: DataTypes.STRING,

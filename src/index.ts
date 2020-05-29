@@ -1,38 +1,28 @@
-import express from 'express'
+import path from 'path'
 import { createModels } from './models'
 import config from '../config/config.json'
+import { GraphQLServer } from 'graphql-yoga'
+import Recipe from './services/Recipe'
+import resolvers from './interface/resolvers'
+import Ingredient from './services/Ingredient'
+import { createIndexSchema } from './helpers/schemaGenerator'
+import Technique from './services/Technique'
 
-const PORT = process.env.PORT || 8080
-const app = express()
+createIndexSchema(path.join(__dirname, './interface/schemas/'))
 const db = createModels(config)
-app.get('/ping', async (req, res) => {
-  const newTechnique = await db.Technique.create({
-    name: 'arrimina',
-    description: 'firria',
-    standardTemperature: 22,
-    duration: 33,
-    title: 'amuni',
-  })
 
-  const oneRec = await db.Recipe.create({ name: 'petro', title: 'racina', description: 'schifio', author: 'maria' })
-  await oneRec?.addTechnique(newTechnique, { through: { idealTemperature: 232 } })
-  const allRecipes = await db.Recipe.findAll({
-    include: [
-      {
-        model: db.Ingredient,
-        as: 'ingredients',
-        attributes: ['name', 'title', 'description'],
-      },
-      {
-        model: db.Technique,
-        as: 'techniques',
-        attributes: ['name', 'title', 'description'],
-      },
-    ],
-  })
-  res.send(allRecipes)
+const server = new GraphQLServer({
+  typeDefs: './src/interface/schema/index.graphql',
+  resolvers,
+  context: {
+    service: {
+      recipe: new Recipe(db),
+      ingredient: new Ingredient(db),
+      technique: new Technique(db),
+    },
+  },
 })
 
-app.listen(PORT, () => {
-  console.log('Started at http://localhost:%d', PORT)
+server.start(() => {
+  console.log('Server started')
 })

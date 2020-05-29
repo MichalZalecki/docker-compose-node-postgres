@@ -9,13 +9,13 @@ import { IngredientInstance } from '../../models/Ingredient'
 const db = createModels(config)
 
 const dummyIngredient = {
-  name: 'Flour',
+  key: 'Flour',
   title: 'flour',
   description: 'white dust',
 }
 
 const dummyRecipe = {
-  name: 'bread',
+  key: 'bread',
   title: 'bread',
   description: 'put all the stuff',
   author: 'myself',
@@ -50,7 +50,7 @@ describe('Test the Recipe service', () => {
     let newRecipe
     try {
       newRecipe = await recipe.create({
-        name: dummyRecipe.name,
+        key: dummyRecipe.key,
         title: dummyRecipe.title,
         description: dummyRecipe.description,
         author: dummyRecipe.author,

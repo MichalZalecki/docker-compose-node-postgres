@@ -5,7 +5,7 @@ import { TechniqueInstance, TechniqueAttributes } from './Technique'
 import { RecipeTechniqueAttributes } from './RecipeTechnique'
 export interface RecipeAttributes {
   id?: string
-  name: string
+  key: string
   title: string
   author: string
   description: string
@@ -83,7 +83,7 @@ export const RecipeFactory = (
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    name: {
+    key: {
       type: DataTypes.STRING,
       allowNull: false,
     },

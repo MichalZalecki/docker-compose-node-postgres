@@ -1,0 +1,10 @@
+type Technique {
+  id: ID!
+  title: String!
+  key: String!
+  description: String
+  standardTemperature: Float
+  videoLink: String
+  createdAt: Date
+  updatedAt: Date
+}

@@ -1,0 +1,8 @@
+type Ingredient {
+  id: ID!
+  title: String!
+  key: String!
+  description: String
+  createdAt: Date
+  updatedAt: Date
+}

@@ -4,14 +4,14 @@ import ErrorGenerator from '../error'
 
 export interface IngredientCreateInterface {
   id?: string
-  name: string
+  key: string
   title: string
   description: string
 }
 
 interface ingredientFindInterface {
   id?: string
-  name?: string
+  key?: string
   title?: string
   description?: string
 }

@@ -10,7 +10,6 @@
     "build": "tsc",
     "build:watch": "tsc -w",
     "migrations": "npx sequelize db:migrate",
-    "migrations:test": "npx sequelize db:migrate --env test",
     "migrations:undo": "npx sequelize db:migrate:undo:all",
     "test": "./scripts/test.sh"
   },
@@ -31,6 +30,7 @@
     "@types/pg": "^7.4.14",
     "@types/sequelize": "^4.27.24",
     "express": "^4.16.4",
+    "graphql-yoga": "^1.18.3",
     "pg": "^7.9.0",
     "sequelize": "^4.38.0",
     "sequelize-cli": "^5.5.1",

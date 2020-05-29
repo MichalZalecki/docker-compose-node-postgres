@@ -4,7 +4,7 @@ import ErrorGenerator from '../error'
 
 export interface TechniqueCreateInterface {
   id?: string
-  name: string
+  key: string
   title: string
   description: string
   duration: number
@@ -14,7 +14,7 @@ export interface TechniqueCreateInterface {
 
 interface techniqueFindInterface {
   id?: string
-  name?: string
+  key?: string
   title?: string
   description?: string
   duration?: number

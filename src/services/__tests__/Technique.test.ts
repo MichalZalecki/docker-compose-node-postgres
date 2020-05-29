@@ -5,7 +5,7 @@ import config from '../../../config/config.json'
 const db = createModels(config)
 
 const dummyTechnique = {
-  name: 'Slap and fold',
+  key: 'Slap and fold',
   title: 'slap and fold',
   description: 'first slap and then fold',
   duration: 43,
