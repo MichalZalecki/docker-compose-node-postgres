@@ -30,18 +30,18 @@ beforeAll(async () => {
   ingredietsCreated = await ingredient.create([dummyIngredient, dummyIngredient, dummyIngredient])
 })
 
-afterAll(async () => {
-  await db.Recipe.destroy({
-    where: {},
-    truncate: true,
-    cascade: true,
-  })
-  await db.Ingredient.destroy({
-    where: {},
-    truncate: true,
-    cascade: true,
-  })
-})
+// afterAll(async () => {
+//   await db.Recipe.destroy({
+//     where: {},
+//     truncate: true,
+//     cascade: true,
+//   })
+//   await db.Ingredient.destroy({
+//     where: {},
+//     truncate: true,
+//     cascade: true,
+//   })
+// })
 
 describe('Test the Recipe service', () => {
   test('should create a new Recipe', async () => {

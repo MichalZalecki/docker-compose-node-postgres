@@ -1,12 +1,13 @@
-import { Context } from './typings'
-import { ingredientFindParams } from '../../services/Ingredient'
+import { Context, Args } from './typings'
 
 export default {
-  ingredient(parent: any, { query: ingredientFindParams }, { service }: Context) {
-    return service.Ingredient.find
+  ingredients(parent: any, args: Args, { service }: Context) {
+    return service.ingredient.find(args.query)
   },
-  recipe(parent, params, { service }: Context) {
-    return service.Technique
+  recipes(parent: any, args: Args, { service }: Context) {
+    return service.recipe.find({})
   },
-  technique(parent, params, { service }: Context) {},
+  techniques(parent: any, args: Args, { service }: Context) {
+    return service.technique.find(args.query)
+  },
 }

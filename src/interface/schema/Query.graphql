@@ -1,5 +1,0 @@
-type Query {
-  recipes(ids: [ID!]): [Recipe!]!
-  ingredients(ids: [ID!]): [Ingredient!]!
-  techniques:(ids: [ID!]) [Technique!]!
-}

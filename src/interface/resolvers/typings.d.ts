@@ -1,16 +1,17 @@
 import Ingredient from '../../services/Ingredient'
 import Recipe from '../../services/Recipe'
-import Technique from '../../services/Technique'
+import Technique, { techniqueFindParams } from '../../services/Technique'
 import { ingredientFindParams } from '../../services/Ingredient'
 import { recipeFindParams } from '../../services/Recipe'
-import { techniqueFindParams } from '../../services/Ingredient'
 
 type Context = {
   service: {
-    Ingredient: Ingredient
-    Recipe: Recipe
-    Technique: Technique
+    ingredient: Ingredient
+    recipe: Recipe
+    technique: Technique
   }
 }
 
-type Args = ingredientFindParams | recipeFindParams | techniqueFindParams
+type Args = {
+  query: ingredientFindParams | recipeFindParams | techniqueFindParams
+}

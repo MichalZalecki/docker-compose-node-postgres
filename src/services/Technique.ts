@@ -2,7 +2,7 @@ import { DBInterface } from '../typings/DbInterface'
 import { TechniqueInstance, TechniqueAttributes } from '../models/Technique'
 import ErrorGenerator from '../error'
 
-interface techniqueFindParams extends Partial<Omit<TechniqueAttributes, 'videoLink'>> {}
+export interface techniqueFindParams extends Partial<Omit<TechniqueAttributes, 'videoLink'>> {}
 
 export default class Technique {
   private db: DBInterface
