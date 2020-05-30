@@ -1,43 +1,40 @@
 import { DBInterface } from '../typings/DbInterface'
-import { RecipeInstance } from '../models/Recipe'
+import { RecipeAttributes } from '../models/Recipe'
 import ErrorGenerator from '../error'
+import { RecipeIngredientAttributes } from '../models/RecipeIngredient'
+import { RecipeTechniqueAttributes } from '../models/RecipeTechnique'
 
-type recipeQueryParams = keyof RecipeInstance
+export interface recipeFindParams extends Partial<RecipeAttributes> {}
 
-interface TechniqueApiInterface {
+interface TechniqueApiInterface extends Omit<RecipeTechniqueAttributes, 'techniqueId'> {
   id: string
   idealTemperature: number
 }
 
-export interface RecipeIngredientApiInterface {
+export interface RecipeIngredientApiInterface extends Omit<RecipeIngredientAttributes, 'ingredientId'> {
   id: string
-  amount: number
 }
-interface RecipeApiInterface {
-  key: string
-  title: string
-  description: string
-  author: string
+interface RecipeApiInterface extends RecipeAttributes {
   ingredients?: RecipeIngredientApiInterface[]
   techniques?: TechniqueApiInterface[]
 }
 
 export default class Recipe {
   private db: DBInterface
-  private attributes: {
+  private eagerAttributes: {
     ingredients: string[]
     techniques: string[]
   }
 
   constructor(db: DBInterface) {
     this.db = db
-    this.attributes = {
+    this.eagerAttributes = {
       ingredients: ['key', 'title', 'description'],
       techniques: ['key', 'title', 'description', 'duration', 'standardTemperature', 'videoLink'],
     }
   }
 
-  async find(params: recipeQueryParams): Promise<RecipeInstance[]> {
+  async find(params: recipeFindParams): Promise<RecipeAttributes[]> {
     try {
       const recipeFound = await this.db.Recipe.findAll({
         where: params,
@@ -46,12 +43,12 @@ export default class Recipe {
           {
             model: this.db.Ingredient,
             as: 'ingredients',
-            attributes: this.attributes.ingredients,
+            attributes: this.eagerAttributes.ingredients,
           },
           {
             model: this.db.Technique,
             as: 'techniques',
-            attributes: this.attributes.techniques,
+            attributes: this.eagerAttributes.techniques,
           },
         ],
       })
@@ -69,12 +66,12 @@ export default class Recipe {
           {
             model: this.db.Ingredient,
             as: 'ingredients',
-            attributes: this.attributes.ingredients,
+            attributes: this.eagerAttributes.ingredients,
           },
           {
             model: this.db.Technique,
             as: 'techniques',
-            attributes: this.attributes.techniques,
+            attributes: this.eagerAttributes.techniques,
           },
         ],
       })
@@ -84,7 +81,7 @@ export default class Recipe {
     }
   }
 
-  async create(recipe: RecipeApiInterface): Promise<RecipeInstance> {
+  async create(recipe: RecipeApiInterface): Promise<RecipeAttributes> {
     try {
       const newRecipe = await this.db.Recipe.create({
         key: recipe.key,

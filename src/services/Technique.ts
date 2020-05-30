@@ -1,25 +1,8 @@
 import { DBInterface } from '../typings/DbInterface'
-import { TechniqueInstance } from '../models/Technique'
+import { TechniqueInstance, TechniqueAttributes } from '../models/Technique'
 import ErrorGenerator from '../error'
 
-export interface TechniqueCreateInterface {
-  id?: string
-  key: string
-  title: string
-  description: string
-  duration: number
-  standardTemperature: number
-  videoLink: string
-}
-
-interface techniqueFindInterface {
-  id?: string
-  key?: string
-  title?: string
-  description?: string
-  duration?: number
-  standardTemperature?: number
-}
+interface techniqueFindParams extends Partial<Omit<TechniqueAttributes, 'videoLink'>> {}
 
 export default class Technique {
   private db: DBInterface
@@ -28,7 +11,7 @@ export default class Technique {
     this.db = db
   }
 
-  async find(params?: techniqueFindInterface): Promise<TechniqueInstance[]> {
+  async find(params?: techniqueFindParams): Promise<TechniqueInstance[]> {
     try {
       const techniquesFound = await this.db.Technique.findAll({ where: params })
       return techniquesFound
@@ -37,7 +20,7 @@ export default class Technique {
     }
   }
 
-  async create(techniques: TechniqueCreateInterface[]): Promise<TechniqueInstance[]> {
+  async create(techniques: TechniqueAttributes[]): Promise<TechniqueInstance[]> {
     if (!techniques || !techniques.length) {
       throw new ErrorGenerator('Server.internal')
     }

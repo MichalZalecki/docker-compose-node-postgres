@@ -4,7 +4,6 @@ import { RecipeIngredientApiInterface } from '../Recipe'
 
 import { createModels } from '../../models'
 import config from '../../../config/config.json'
-import { IngredientCreateInterface } from '../Ingredient'
 import { IngredientInstance } from '../../models/Ingredient'
 const db = createModels(config)
 
@@ -45,7 +44,7 @@ afterAll(async () => {
 })
 
 describe('Test the Recipe service', () => {
-  test('should create a new Recipe', async (done) => {
+  test('should create a new Recipe', async () => {
     const recipe = new Recipe(db)
     let newRecipe
     try {
@@ -57,10 +56,25 @@ describe('Test the Recipe service', () => {
         ingredients: ingredietsCreated.map((i) => ({ id: i.id!, amount: 200 })),
       })
       expect(newRecipe).toHaveProperty('id')
-      done()
     } catch (e) {
       console.log(e)
-      done()
+    }
+  })
+
+  test('should find the new Recipe', async () => {
+    const recipe = new Recipe(db)
+    let newRecipe
+    try {
+      newRecipe = await recipe.create({
+        key: dummyRecipe.key,
+        title: dummyRecipe.title,
+        description: dummyRecipe.description,
+        author: dummyRecipe.author,
+        ingredients: ingredietsCreated.map((i) => ({ id: i.id!, amount: 200 })),
+      })
+      expect(newRecipe).toHaveProperty('id')
+    } catch (e) {
+      console.log(e)
     }
   })
 })

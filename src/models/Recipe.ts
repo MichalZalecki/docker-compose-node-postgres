@@ -3,6 +3,7 @@ import { SequelizeAttributes } from '../typings/SequelizeAttributes'
 import { IngredientInstance, IngredientAttributes } from './Ingredient'
 import { TechniqueInstance, TechniqueAttributes } from './Technique'
 import { RecipeTechniqueAttributes } from './RecipeTechnique'
+import { RecipeIngredientAttributes } from './RecipeIngredient'
 export interface RecipeAttributes {
   id?: string
   key: string
@@ -11,12 +12,7 @@ export interface RecipeAttributes {
   description: string
   updatedAt?: Date
 }
-interface RecipeIngredientAttributes {
-  recipeId?: string
-  ingredientId?: string
-  amount: number
-  updatedAt?: Date
-}
+
 export interface RecipeInstance extends Sequelize.Instance<RecipeAttributes>, RecipeAttributes {
   getIngredients: Sequelize.BelongsToManyGetAssociationsMixin<IngredientInstance>
   setIngredients: Sequelize.BelongsToManySetAssociationsMixin<
