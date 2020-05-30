@@ -1,5 +1,5 @@
 import { DBInterface } from '../typings/DbInterface'
-import { IngredientInstance, IngredientAttributes } from '../models/Ingredient'
+import { IngredientAttributes } from '../models/Ingredient'
 import ErrorGenerator from '../error'
 
 export interface ingredientFindParams extends Partial<IngredientAttributes> {}
@@ -11,22 +11,22 @@ export default class Ingredient {
     this.db = db
   }
 
-  async find(params?: ingredientFindParams): Promise<IngredientInstance[]> {
+  async find(params?: ingredientFindParams): Promise<IngredientAttributes[]> {
     try {
       const ingredientFound = await this.db.Ingredient.findAll({ where: params })
-      return ingredientFound
+      return ingredientFound.map((el) => el.get({ plain: true }))
     } catch (e) {
       throw new ErrorGenerator('Server.internal', e)
     }
   }
 
-  async create(ingredients: IngredientAttributes[]): Promise<IngredientInstance[]> {
+  async create(ingredients: IngredientAttributes[]): Promise<IngredientAttributes[]> {
     if (!ingredients || !ingredients.length) {
       throw new ErrorGenerator('Server.internal')
     }
 
     try {
-      const newIngredients = this.db.Ingredient.bulkCreate(ingredients)
+      const newIngredients = this.db.Ingredient.bulkCreate(ingredients).map((el) => el.get({ plain: true }))
       return newIngredients
     } catch (e) {
       throw new ErrorGenerator('Server.internal', e)

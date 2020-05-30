@@ -36,9 +36,9 @@ export default class Recipe {
 
   async find(params: recipeFindParams): Promise<RecipeAttributes[]> {
     try {
-      const recipeFound = await this.db.Recipe.findAll({
+      const recipesFound = await this.db.Recipe.findAll({
         where: params,
-        raw: true,
+        //@ts-ignore
         include: [
           {
             model: this.db.Ingredient,
@@ -52,8 +52,8 @@ export default class Recipe {
           },
         ],
       })
-      console.log(recipeFound)
-      return recipeFound
+      // console.log('FOUND', recipesFound)
+      return recipesFound.map((el) => el.get({ plain: true }))
     } catch (e) {
       throw new ErrorGenerator('Server.internal', e)
     }
@@ -75,7 +75,7 @@ export default class Recipe {
           },
         ],
       })
-      return recipeFound
+      return recipeFound?.get({ plain: true })
     } catch (e) {
       return new ErrorGenerator('Server.internal', e)
     }
@@ -105,7 +105,7 @@ export default class Recipe {
         }))
         await this.db.RecipeTechnique.bulkCreate(technique)
       }
-      return newRecipe
+      return newRecipe.get({ plain: true })
     } catch (e) {
       throw new ErrorGenerator('Server.internal', e)
     }
