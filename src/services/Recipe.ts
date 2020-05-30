@@ -14,7 +14,7 @@ interface TechniqueApiInterface extends Omit<RecipeTechniqueAttributes, 'techniq
 export interface RecipeIngredientApiInterface extends Omit<RecipeIngredientAttributes, 'ingredientId'> {
   id: string
 }
-interface RecipeApiInterface extends RecipeAttributes {
+export interface RecipeApiInterface extends RecipeAttributes {
   ingredients?: RecipeIngredientApiInterface[]
   techniques?: TechniqueApiInterface[]
 }
@@ -24,6 +24,8 @@ export default class Recipe {
   private eagerAttributes: {
     ingredients: string[]
     techniques: string[]
+    recipeIngredient: string[]
+    recipeTechnique: string[]
   }
 
   constructor(db: DBInterface) {
@@ -31,10 +33,12 @@ export default class Recipe {
     this.eagerAttributes = {
       ingredients: ['key', 'title', 'description'],
       techniques: ['key', 'title', 'description', 'duration', 'standardTemperature', 'videoLink'],
+      recipeIngredient: ['amount'],
+      recipeTechnique: ['idealTemperature'],
     }
   }
 
-  async find(params: recipeFindParams): Promise<RecipeAttributes[]> {
+  async find(params: recipeFindParams): Promise<RecipeApiInterface[]> {
     try {
       const recipesFound = await this.db.Recipe.findAll({
         where: params,
@@ -80,6 +84,9 @@ export default class Recipe {
   }
 
   async create(recipe: RecipeApiInterface): Promise<RecipeAttributes> {
+    if (!recipe) {
+      throw new ErrorGenerator('Validation.rejected')
+    }
     try {
       const newRecipe = await this.db.Recipe.create({
         key: recipe.key,

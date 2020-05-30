@@ -22,7 +22,7 @@ export default class Ingredient {
 
   async create(ingredients: IngredientAttributes[]): Promise<IngredientAttributes[]> {
     if (!ingredients || !ingredients.length) {
-      throw new ErrorGenerator('Server.internal')
+      throw new ErrorGenerator('Validation.rejected')
     }
 
     try {

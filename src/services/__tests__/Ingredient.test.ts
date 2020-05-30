@@ -10,13 +10,13 @@ const dummyIngredient = {
   description: 'white dust',
 }
 
-// afterEach(async () => {
-//   await db.Ingredient.destroy({
-//     where: {},
-//     truncate: true,
-//     cascade: true,
-//   })
-// })
+afterEach(async () => {
+  await db.Ingredient.destroy({
+    where: {},
+    truncate: true,
+    cascade: true,
+  })
+})
 
 describe('Test the Ingredient service', () => {
   test('should create multiple ingredients in the db', async () => {

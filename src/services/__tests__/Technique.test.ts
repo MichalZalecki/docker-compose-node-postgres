@@ -13,13 +13,13 @@ const dummyTechnique = {
   videoLink: 'https://you.tu/243423dsdasddds/',
 }
 
-// afterEach(async () => {
-//   await db.Technique.destroy({
-//     where: {},
-//     truncate: true,
-//     cascade: true,
-//   })
-// })
+afterEach(async () => {
+  await db.Technique.destroy({
+    where: {},
+    truncate: true,
+    cascade: true,
+  })
+})
 
 describe('Test the Technique service', () => {
   test('should create multiple ingredients in the db', async () => {
