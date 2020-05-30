@@ -11,6 +11,8 @@ export interface RecipeAttributes {
   author: string
   description: string
   updatedAt?: Date
+  ingredients?: RecipeIngredientAttributes
+  techniques?: RecipeTechniqueAttributes
 }
 
 export interface RecipeInstance extends Sequelize.Instance<RecipeAttributes>, RecipeAttributes {
