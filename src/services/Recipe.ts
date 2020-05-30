@@ -38,7 +38,6 @@ export default class Recipe {
     try {
       const recipesFound = await this.db.Recipe.findAll({
         where: params,
-        //@ts-ignore
         include: [
           {
             model: this.db.Ingredient,
@@ -52,7 +51,6 @@ export default class Recipe {
           },
         ],
       })
-      // console.log('FOUND', recipesFound)
       return recipesFound.map((el) => el.get({ plain: true }))
     } catch (e) {
       throw new ErrorGenerator('Server.internal', e)
