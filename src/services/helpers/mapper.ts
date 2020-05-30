@@ -5,13 +5,14 @@ import { RecipeAttributes } from '../../models/Recipe'
 import { TechniqueAttributes } from '../../models/Technique'
 import { RecipeTechniqueAttributes } from '../../models/RecipeTechnique'
 
-export function mapRecipe(recipe: RecipeFromDB): RecipeMappedToApi | null {
+export function mapRecipe(recipe: RecipeFromDB | any): RecipeMappedToApi | null {
   if (!recipe) return null
   return { ...recipe, ingredients: mapIngredient(recipe.ingredients), techniques: mapTechnique(recipe.techniques) }
 }
 
 function mapIngredient(ingredients: ingredientFromDB[]) {
-  if (!ingredients.length) return []
+  if (!ingredients || !ingredients.length) return ingredients
+
   return ingredients.map((ingredient) => ({
     ...ingredient,
     id: ingredient.RecipeIngredient.ingredientId!,
@@ -20,7 +21,7 @@ function mapIngredient(ingredients: ingredientFromDB[]) {
 }
 
 function mapTechnique(technique: techniqueFromDB[]) {
-  if (!technique.length) return []
+  if (!technique || !technique.length) return technique
   return technique.map((ingredient) => ({
     ...ingredient,
     id: ingredient.RecipeTechnique.techniqueId!,

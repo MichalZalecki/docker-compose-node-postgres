@@ -54,15 +54,15 @@ let recipe2 = {
 describe('Mappers should work', () => {
   test('should map recipes and techniques to plain object', () => {
     const mapped = mapRecipe(recipe2)
-    expect(mapped.ingredients![0]).toHaveProperty('id')
-    expect(mapped.ingredients![0]).toHaveProperty('amount')
-    expect(mapped.techniques![0]).toHaveProperty('id')
-    expect(mapped.techniques![0]).toHaveProperty('idealTemperature')
+    expect(mapped!.ingredients![0]).toHaveProperty('id')
+    expect(mapped!.ingredients![0]).toHaveProperty('amount')
+    expect(mapped!.techniques![0]).toHaveProperty('id')
+    expect(mapped!.techniques![0]).toHaveProperty('idealTemperature')
   })
   test('shouldn\t break if having empty recipes or techniques', () => {
-    const mapped = mapRecipe(recipe2)
-    expect(mapped.ingredients).toEqual([])
-    expect(mapped.ingredients).toEqual([])
-    expect(mapped.description).toBeDefined()
+    const mapped = mapRecipe(recipe1)
+    expect(mapped!.ingredients).toEqual([])
+    expect(mapped!.ingredients).toEqual([])
+    expect(mapped!.description).toBeDefined()
   })
 })

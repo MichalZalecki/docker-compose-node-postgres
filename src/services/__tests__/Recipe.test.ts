@@ -1,6 +1,5 @@
 import Recipe from '../Recipe'
 import Ingredient from '../Ingredient'
-import { RecipeIngredientApiInterface } from '../Recipe'
 
 import { createModels } from '../../models'
 import config from '../../../config/config.json'
@@ -54,10 +53,12 @@ describe('Test the Recipe service', () => {
         description: dummyRecipe.description,
         author: dummyRecipe.author,
         ingredients: ingredietsCreated.map((i) => ({ id: i.id!, amount: 200 })),
+        techniques: [],
       })
     } catch (e) {
       console.log(e)
     }
+    console.log(newRecipe)
     expect(newRecipe).toHaveProperty('id')
   })
 

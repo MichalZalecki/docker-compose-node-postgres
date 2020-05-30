@@ -101,7 +101,7 @@ export default class Recipe {
     }
   }
 
-  async create(recipe: RecipeMappedToApi): Promise<RecipeAttributes> {
+  async create(recipe: RecipeMappedToApi): Promise<RecipeMappedToApi | null | undefined> {
     if (!recipe) {
       throw new ErrorGenerator('Validation.rejected')
     }
@@ -128,7 +128,7 @@ export default class Recipe {
         }))
         await this.db.RecipeTechnique.bulkCreate(technique)
       }
-      return newRecipe.get({ plain: true })
+      return newRecipe ? mapRecipe(newRecipe.get({ plain: true })) : null
     } catch (e) {
       throw new ErrorGenerator('Server.internal', e)
     }
