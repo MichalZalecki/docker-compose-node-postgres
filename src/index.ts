@@ -21,5 +21,5 @@ const server = new GraphQLServer({
 })
 
 server.start((info) => {
-  console.log('Server started', info.port)
+  console.log('Server started at port:', info.port)
 })

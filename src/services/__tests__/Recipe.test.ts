@@ -1,9 +1,11 @@
 import Recipe from '../Recipe'
 import Ingredient from '../Ingredient'
+import Technique from '../Technique'
 
 import { createModels } from '../../models'
 import config from '../../../config/config.json'
-import { IngredientInstance, IngredientAttributes } from '../../models/Ingredient'
+import { IngredientAttributes } from '../../models/Ingredient'
+import { TechniqueAttributes } from '../../models/Technique'
 const db = createModels(config)
 
 const dummyIngredient = {
@@ -21,12 +23,24 @@ const dummyRecipe = {
   ingredients: [],
 }
 
+const dummyTechnique = {
+  key: 'Slap and fold',
+  title: 'slap and fold',
+  description: 'first slap and then fold',
+  duration: 43,
+  standardTemperature: 32,
+  videoLink: 'https://you.tu/243423dsdasddds/',
+}
+
 let ingredietsCreated: IngredientAttributes[]
+let techniquesCreated: TechniqueAttributes[]
 
 const ingredient = new Ingredient(db)
+const technique = new Technique(db)
 
 beforeAll(async () => {
   ingredietsCreated = await ingredient.create([dummyIngredient, dummyIngredient, dummyIngredient])
+  techniquesCreated = await technique.create([dummyTechnique])
 })
 
 afterAll(async () => {
@@ -53,12 +67,15 @@ describe('Test the Recipe service', () => {
         description: dummyRecipe.description,
         author: dummyRecipe.author,
         ingredients: ingredietsCreated.map((i) => ({ id: i.id!, amount: 200 })),
-        techniques: [],
+        techniques: techniquesCreated.map((technique) => ({
+          id: technique.id!,
+          duration: technique.description!,
+          idealTemperature: technique.standardTemperature!,
+        })),
       })
     } catch (e) {
       console.log(e)
     }
-    console.log(newRecipe)
     expect(newRecipe).toHaveProperty('id')
   })
 
@@ -72,5 +89,7 @@ describe('Test the Recipe service', () => {
     }
     expect(foundRecipes[0]).toHaveProperty('title')
     expect(foundRecipes[0]).toHaveProperty('id')
+    expect(foundRecipes[0]).toHaveProperty('ingredients')
+    expect(foundRecipes[0].techniques[0]).toHaveProperty('duration')
   })
 })
