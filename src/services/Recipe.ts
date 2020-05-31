@@ -65,11 +65,10 @@ export default class Recipe {
         ['id', 'key', 'title', 'description', 'author'],
         ['limit', 'page']
       )
-      console.log('EHEHEH', findParams, paginationParams)
       const recipesFound = await this.db.Recipe.findAll({
         where: findParams,
         limit: paginationParams.limit,
-        offset: paginationParams.limit && paginationParams && paginationParams.limit * paginationParams.page,
+        offset: paginationParams.limit && paginationParams.page && paginationParams.limit * paginationParams.page,
         include: [
           {
             model: this.db.Ingredient,
@@ -85,7 +84,7 @@ export default class Recipe {
       })
       return recipesFound.map((recipe) => mapRecipe(recipe.get({ plain: true })))
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).message
+      throw Error(e)
     }
   }
 
@@ -118,7 +117,7 @@ export default class Recipe {
       }
       return newRecipe.get({ plain: true })
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).message
+      throw new Error(e)
     }
   }
 }

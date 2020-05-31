@@ -1,6 +1,6 @@
 const queryTypeDef = `
 type Query {
-  recipes(query: RecipeInput): [Recipe]
+  recipes(query: RecipeFindInput): [Recipe]
   ingredients: [Ingredient]
   techniques: [Technique]
 }

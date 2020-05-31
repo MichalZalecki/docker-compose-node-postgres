@@ -16,20 +16,20 @@ export default class Ingredient {
       const ingredientFound = await this.db.Ingredient.findAll({ where: params })
       return ingredientFound.map((el) => el.get({ plain: true }))
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).message
+      throw new ErrorGenerator('Server.internal', e).type
     }
   }
 
   async create(ingredients: IngredientAttributes[]): Promise<IngredientAttributes[]> {
     if (!ingredients || !ingredients.length) {
-      throw new ErrorGenerator('Validation.rejected').message
+      throw new ErrorGenerator('Validation.rejected').type
     }
 
     try {
       const newIngredients = this.db.Ingredient.bulkCreate(ingredients).map((el) => el.get({ plain: true }))
       return newIngredients
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).message
+      throw new ErrorGenerator('Server.internal', e).type
     }
   }
 }
