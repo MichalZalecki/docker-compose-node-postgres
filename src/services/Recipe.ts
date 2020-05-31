@@ -3,11 +3,15 @@ import { RecipeAttributes } from '../models/Recipe'
 import ErrorGenerator from '../error'
 import { RecipeIngredientAttributes } from '../models/RecipeIngredient'
 import { RecipeTechniqueAttributes } from '../models/RecipeTechnique'
-import { mapRecipe } from './helpers/mapper'
+import { mapRecipe, mapQueryParams } from './helpers/mapper'
 import { IngredientAttributes } from '../models/Ingredient'
 import { TechniqueAttributes } from '../models/Technique'
+import { title } from 'process'
 
-export interface recipeFindParams extends Partial<RecipeAttributes> {}
+export interface recipeFindParams extends Partial<RecipeAttributes> {
+  page?: number
+  limit?: number
+}
 
 export interface RecipeFromDB extends Omit<Partial<RecipeAttributes>, 'ingredients' | 'techniques'> {
   ingredients: ingredientFromDB[]
@@ -54,10 +58,18 @@ export default class Recipe {
     }
   }
 
-  async find(params: recipeFindParams): Promise<RecipeMappedToApi[]> {
+  async find(params: recipeFindParams): Promise<(RecipeMappedToApi | null)[]> {
     try {
+      const { findParams, paginationParams } = mapQueryParams(
+        params,
+        ['id', 'key', 'title', 'description', 'author'],
+        ['limit', 'page']
+      )
+      console.log('EHEHEH', findParams, paginationParams)
       const recipesFound = await this.db.Recipe.findAll({
-        where: params,
+        where: findParams,
+        limit: paginationParams.limit,
+        offset: paginationParams.limit && paginationParams && paginationParams.limit * paginationParams.page,
         include: [
           {
             model: this.db.Ingredient,
@@ -71,33 +83,9 @@ export default class Recipe {
           },
         ],
       })
-      //@ts-ignore
       return recipesFound.map((recipe) => mapRecipe(recipe.get({ plain: true })))
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e)
-    }
-  }
-
-  async getById(id: string): Promise<RecipeMappedToApi | null | undefined> {
-    try {
-      const recipeFound = await this.db.Recipe.findById(id, {
-        include: [
-          {
-            model: this.db.Ingredient,
-            as: 'ingredients',
-            attributes: this.eagerAttributes.ingredients,
-          },
-          {
-            model: this.db.Technique,
-            as: 'techniques',
-            attributes: this.eagerAttributes.techniques,
-          },
-        ],
-      })
-      //@ts-ignore
-      return recipeFound ? mapRecipe(recipeFound.get({ plain: true })) : null
-    } catch (e) {
-      new ErrorGenerator('Server.internal', e)
+      throw new ErrorGenerator('Server.internal', e).message
     }
   }
 
@@ -130,7 +118,7 @@ export default class Recipe {
       }
       return newRecipe.get({ plain: true })
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e)
+      throw new ErrorGenerator('Server.internal', e).message
     }
   }
 }

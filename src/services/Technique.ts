@@ -16,20 +16,20 @@ export default class Technique {
       const techniquesFound = await this.db.Technique.findAll({ where: params })
       return techniquesFound.map((el) => el.get({ plain: true }))
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e)
+      throw new ErrorGenerator('Server.internal', e).message
     }
   }
 
   async create(techniques: TechniqueAttributes[]): Promise<TechniqueAttributes[]> {
     if (!techniques || !techniques.length) {
-      throw new ErrorGenerator('Server.internal')
+      throw new ErrorGenerator('Server.internal').message
     }
 
     try {
       const newTechnique = await this.db.Technique.bulkCreate(techniques)
       return newTechnique.map((el) => el.get({ plain: true }))
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e)
+      throw new ErrorGenerator('Server.internal', e).message
     }
   }
 }

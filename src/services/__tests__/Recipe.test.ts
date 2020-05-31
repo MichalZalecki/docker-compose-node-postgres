@@ -79,7 +79,7 @@ describe('Test the Recipe service', () => {
     expect(newRecipe).toHaveProperty('id')
   })
 
-  test('should find the new Recipe', async () => {
+  test('should find all the Recipes', async () => {
     const recipe = new Recipe(db)
     let foundRecipes: any
     try {

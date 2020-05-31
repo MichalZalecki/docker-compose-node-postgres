@@ -1,4 +1,6 @@
-import { RecipeMappedToApi, RecipeFromDB, ingredientFromDB, techniqueFromDB } from '../Recipe'
+import { RecipeMappedToApi, RecipeFromDB, ingredientFromDB, techniqueFromDB, recipeFindParams } from '../Recipe'
+import { ingredientFindParams } from '../Ingredient'
+import { techniqueFindParams } from '../Technique'
 
 export function mapRecipe(recipe: RecipeFromDB | any): RecipeMappedToApi | null {
   if (!recipe) return null
@@ -22,4 +24,27 @@ function mapTechnique(technique: techniqueFromDB[]) {
     id: ingredient.RecipeTechnique.techniqueId!,
     idealTemperature: ingredient.RecipeTechnique.idealTemperature!,
   }))
+}
+
+export function mapQueryParams(
+  params: recipeFindParams & ingredientFindParams & techniqueFindParams,
+  findParamsKeys: string[],
+  paginationsParamsKeys: string[]
+): any {
+  if (!params) return { findParams: {}, paginationParams: {} }
+
+  return Object.keys(params).reduce(
+    (memo, paramKey) => {
+      if (findParamsKeys.includes(paramKey)) {
+        //@ts-ignore
+        memo.findParams[paramKey] = params[paramKey]
+      }
+      if (paginationsParamsKeys.includes(paramKey)) {
+        //@ts-ignore
+        memo.paginationParams[paramKey] = params[paramKey]
+      }
+      return memo
+    },
+    { findParams: {}, paginationParams: {} }
+  )
 }

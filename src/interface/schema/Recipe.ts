@@ -11,5 +11,14 @@ type Recipe {
   updatedAt: String
 }
 
+input RecipeInput{
+  id: ID
+  key: String
+  title: String
+  description: String
+  author: String
+  page: Int = 1
+  limit: Int = 15
+}
 `
 export { recipeTypeDef as default }

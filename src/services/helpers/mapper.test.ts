@@ -1,4 +1,4 @@
-import { mapRecipe } from './mapper'
+import { mapRecipe, mapQueryParams } from './mapper'
 
 let recipe1 = {
   id: 'bf3eb840-2a22-4f3b-80ed-e77d3f6322e4',
@@ -51,6 +51,14 @@ let recipe2 = {
   ],
 }
 
+let queryParams = {
+  title: 'hi',
+  description: 'meh',
+  duration: 4,
+  limit: 10,
+  page: 3,
+}
+
 describe('Mappers should work', () => {
   test('should map recipes and techniques to plain object', () => {
     const mapped = mapRecipe(recipe2)
@@ -64,5 +72,23 @@ describe('Mappers should work', () => {
     expect(mapped!.ingredients).toEqual([])
     expect(mapped!.ingredients).toEqual([])
     expect(mapped!.description).toBeDefined()
+  })
+
+  test('should map find and pagination params', async () => {
+    const mapped = mapQueryParams(queryParams, ['title', 'description', 'duration'], ['limit', 'page'])
+    //@ts-ignore
+    expect(mapped.findParams.description).toBeDefined()
+    //@ts-ignore
+    expect(mapped.findParams.description).toBeDefined()
+    //@ts-ignore
+    expect(mapped.paginationParams.limit).toBeDefined()
+  })
+
+  test('should map find and pagination params', async () => {
+    const mapped = mapQueryParams({}, ['title', 'description', 'duration'], ['limit', 'page'])
+    //@ts-ignore
+    expect(mapped.findParams).toEqual({})
+    //@ts-ignore
+    expect(mapped.paginationParams).toEqual({})
   })
 })
