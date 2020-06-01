@@ -19,5 +19,10 @@ input RecipeIngredientInput {
   id: ID!
   amount: Float!
 }
+
+type IngredientInRecipe {
+  id: ID!
+  amount: Float!
+}
 `
 export { ingredientTypeDef as default }

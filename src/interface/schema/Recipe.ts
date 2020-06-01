@@ -29,5 +29,13 @@ input RecipePayloadInput {
   description: String
   author: String!
 }
+
+type RecipeSaved {
+  id: ID
+  key: String
+  title: String
+  description: String
+  author: String
+}
 `
 export { recipeTypeDef as default }

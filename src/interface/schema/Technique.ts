@@ -26,5 +26,11 @@ input RecipeTechniqueInput {
   idealTemperature: Float
 }
 
+type TechniqueInRecipe {
+  id: ID!
+  duration: Float!
+  idealTemperature: Float
+}
+
 `
 export { recipeTypeDef as default }

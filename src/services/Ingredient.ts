@@ -11,25 +11,27 @@ export default class Ingredient {
     this.db = db
   }
 
-  async find(params?: ingredientFindParams): Promise<IngredientAttributes[]> {
+  async find(params?: ingredientFindParams, paramInJoinTable?: any): Promise<IngredientAttributes[]> {
     try {
-      const ingredientFound = await this.db.Ingredient.findAll({ where: params })
+      const ingredientFound = await this.db.Ingredient.findAll({
+        where: params,
+      })
       return ingredientFound.map((el) => el.get({ plain: true }))
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).type
+      throw new Error(e)
     }
   }
 
   async create(ingredients: IngredientAttributes[]): Promise<IngredientAttributes[]> {
     if (!ingredients || !ingredients.length) {
-      throw new ErrorGenerator('Validation.rejected').type
+      throw new ErrorGenerator('Validation.rejected')
     }
 
     try {
       const newIngredients = this.db.Ingredient.bulkCreate(ingredients).map((el) => el.get({ plain: true }))
       return newIngredients
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).type
+      throw new Error(e)
     }
   }
 }

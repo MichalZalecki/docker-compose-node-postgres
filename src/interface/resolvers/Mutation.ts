@@ -2,7 +2,6 @@ import { Context, Args } from './typings'
 
 export default {
   createIngredients(parent: any, args: Args, { service }: Context) {
-    console.log('CALL?', args)
     try {
       return service.ingredient.create(args.ingredientsPayload)
     } catch (e) {
