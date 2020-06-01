@@ -6,6 +6,7 @@ export interface Config {
   port: string
   dialect: string
   operatorsAliases: boolean
+  logging: boolean
 }
 
 export interface Env {

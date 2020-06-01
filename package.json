@@ -5,12 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm run build:watch\" \"npm run start:dev\"",
-    "start": "node dist/index.js",
-    "start:dev": "nodemon dist/index.js",
+    "start:dev": "nodemon dist/src/index.js",
     "build": "tsc",
     "build:watch": "tsc -w",
     "migrations": "npx sequelize db:migrate",
-    "migrations:test": "npx sequelize db:migrate --env test",
     "migrations:undo": "npx sequelize db:migrate:undo:all",
     "test": "./scripts/test.sh"
   },
@@ -26,22 +24,24 @@
   },
   "homepage": "https://github.com/MichalZalecki/docker-compose-node-postgres#readme",
   "dependencies": {
+    "graphql-yoga": "^1.18.3",
+    "pg": "^7.9.0",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^5.5.1",
+    "uuid": "^8.1.0"
+  },
+  "devDependencies": {
     "@types/express": "^4.16.1",
     "@types/node": "^11.13.4",
     "@types/pg": "^7.4.14",
     "@types/sequelize": "^4.27.24",
-    "express": "^4.16.4",
-    "pg": "^7.9.0",
-    "sequelize": "^4.38.0",
-    "sequelize-cli": "^5.5.1",
-    "typed-error": "^3.2.0",
-    "typescript": "^3.4.3",
-    "uuid": "^8.1.0"
-  },
-  "devDependencies": {
+    "@types/ws": "^7.2.4",
     "@types/faker": "^4.1.12",
+    "@types/graphql": "^14.5.0",
     "@types/jest": "^25.2.3",
     "concurrently": "^4.1.0",
+    "ts-node": "7.0.1",
+    "typescript": "^3.4.3",
     "faker": "^4.1.0",
     "jest": "^26.0.1",
     "nodemon": "^1.18.11",

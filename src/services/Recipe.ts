@@ -1,94 +1,103 @@
 import { DBInterface } from '../typings/DbInterface'
-import { RecipeInstance } from '../models/Recipe'
+import { RecipeAttributes } from '../models/Recipe'
 import ErrorGenerator from '../error'
+import { RecipeIngredientAttributes } from '../models/RecipeIngredient'
+import { RecipeTechniqueAttributes } from '../models/RecipeTechnique'
+import { mapRecipe, mapQueryParams } from './helpers/mapper'
+import { IngredientAttributes } from '../models/Ingredient'
+import { TechniqueAttributes } from '../models/Technique'
+import { title } from 'process'
 
-type recipeQueryParams = keyof RecipeInstance
+export interface recipeFindParams extends Partial<RecipeAttributes> {
+  page?: number
+  limit?: number
+}
 
-interface TechniqueApiInterface {
+export interface RecipeFromDB extends Omit<Partial<RecipeAttributes>, 'ingredients' | 'techniques'> {
+  ingredients: ingredientFromDB[]
+  techniques: techniqueFromDB[]
+}
+
+export interface ingredientFromDB extends IngredientAttributes {
+  RecipeIngredient: RecipeIngredientAttributes
+}
+
+export interface techniqueFromDB extends TechniqueAttributes {
+  RecipeTechnique: RecipeTechniqueAttributes
+}
+interface RecipeTechniqueMappedToApi extends Omit<RecipeTechniqueAttributes, 'techniqueId'> {
   id: string
   idealTemperature: number
 }
 
-export interface RecipeIngredientApiInterface {
-  id: string
+interface RecipeIngredientMappedToApi extends Omit<RecipeIngredientAttributes, 'ingredientId'> {
   amount: number
+  id: string
 }
-interface RecipeApiInterface {
-  name: string
-  title: string
-  description: string
-  author: string
-  ingredients?: RecipeIngredientApiInterface[]
-  techniques?: TechniqueApiInterface[]
+export interface RecipeMappedToApi extends Omit<Partial<RecipeAttributes>, 'ingredients' | 'techniques'> {
+  ingredients: RecipeIngredientMappedToApi[]
+  techniques: RecipeTechniqueMappedToApi[]
 }
 
 export default class Recipe {
   private db: DBInterface
-  private attributes: {
+  private eagerAttributes: {
     ingredients: string[]
     techniques: string[]
+    recipeIngredient: string[]
+    recipeTechnique: string[]
   }
 
   constructor(db: DBInterface) {
     this.db = db
-    this.attributes = {
-      ingredients: ['name', 'title', 'description'],
-      techniques: ['name', 'title', 'description', 'duration', 'standardTemperature', 'videoLink'],
+    this.eagerAttributes = {
+      ingredients: ['key', 'title', 'description'],
+      techniques: ['key', 'title', 'description', 'duration', 'standardTemperature', 'videoLink'],
+      recipeIngredient: ['amount'],
+      recipeTechnique: ['idealTemperature'],
     }
   }
 
-  async find(params: recipeQueryParams): Promise<RecipeInstance[]> {
+  async find(params: recipeFindParams): Promise<(RecipeMappedToApi | null)[]> {
     try {
-      const recipeFound = await this.db.Recipe.findAll({
-        where: params,
+      const { findParams, paginationParams } = mapQueryParams(
+        params,
+        ['id', 'key', 'title', 'description', 'author'],
+        ['limit', 'page']
+      )
+      const recipesFound = await this.db.Recipe.findAll({
+        where: findParams,
+        limit: paginationParams.limit,
+        offset: paginationParams.limit && paginationParams.page && paginationParams.limit * paginationParams.page,
         include: [
           {
             model: this.db.Ingredient,
             as: 'ingredients',
-            attributes: this.attributes.ingredients,
+            attributes: this.eagerAttributes.ingredients,
           },
           {
             model: this.db.Technique,
             as: 'techniques',
-            attributes: this.attributes.techniques,
+            attributes: this.eagerAttributes.techniques,
           },
         ],
       })
-      return recipeFound
+      return recipesFound.map((recipe) => mapRecipe(recipe.get({ plain: true })))
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e)
+      throw Error(e)
     }
   }
 
-  async getById(id: string) {
-    try {
-      const recipeFound = await this.db.Recipe.findById(id, {
-        include: [
-          {
-            model: this.db.Ingredient,
-            as: 'ingredients',
-            attributes: this.attributes.ingredients,
-          },
-          {
-            model: this.db.Technique,
-            as: 'techniques',
-            attributes: this.attributes.techniques,
-          },
-        ],
-      })
-      return recipeFound
-    } catch (e) {
-      return new ErrorGenerator('Server.internal', e)
+  async create(recipe: RecipeMappedToApi): Promise<RecipeAttributes> {
+    if (!recipe) {
+      throw new ErrorGenerator('Validation.rejected')
     }
-  }
-
-  async create(recipe: RecipeApiInterface): Promise<RecipeInstance> {
     try {
       const newRecipe = await this.db.Recipe.create({
-        name: recipe.name,
-        title: recipe.title,
-        description: recipe.description,
-        author: recipe.author,
+        key: recipe.key!,
+        title: recipe.title!,
+        description: recipe.description!,
+        author: recipe.author!,
       })
       if (recipe.ingredients && recipe.ingredients.length) {
         const ingredients = recipe.ingredients.map((ing) => ({
@@ -106,9 +115,9 @@ export default class Recipe {
         }))
         await this.db.RecipeTechnique.bulkCreate(technique)
       }
-      return newRecipe
+      return newRecipe.get({ plain: true })
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e)
+      throw new Error(e)
     }
   }
 }

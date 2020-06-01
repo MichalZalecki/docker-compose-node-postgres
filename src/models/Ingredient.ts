@@ -11,7 +11,7 @@ interface RecipeIngredientAttributes {
 
 export interface IngredientAttributes {
   id?: string
-  name: string
+  key: string
   title: string
   description: string
   category?: string
@@ -58,7 +58,7 @@ export const IngredientFactory = (
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    name: {
+    key: {
       type: DataTypes.STRING,
       allowNull: false,
     },

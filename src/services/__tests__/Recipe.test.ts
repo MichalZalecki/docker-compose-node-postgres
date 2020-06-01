@@ -1,21 +1,21 @@
 import Recipe from '../Recipe'
 import Ingredient from '../Ingredient'
-import { RecipeIngredientApiInterface } from '../Recipe'
+import Technique from '../Technique'
 
 import { createModels } from '../../models'
 import config from '../../../config/config.json'
-import { IngredientCreateInterface } from '../Ingredient'
-import { IngredientInstance } from '../../models/Ingredient'
+import { IngredientAttributes } from '../../models/Ingredient'
+import { TechniqueAttributes } from '../../models/Technique'
 const db = createModels(config)
 
 const dummyIngredient = {
-  name: 'Flour',
+  key: 'Flour',
   title: 'flour',
   description: 'white dust',
 }
 
 const dummyRecipe = {
-  name: 'bread',
+  key: 'bread',
   title: 'bread',
   description: 'put all the stuff',
   author: 'myself',
@@ -23,12 +23,24 @@ const dummyRecipe = {
   ingredients: [],
 }
 
-let ingredietsCreated: IngredientInstance[]
+const dummyTechnique = {
+  key: 'Slap and fold',
+  title: 'slap and fold',
+  description: 'first slap and then fold',
+  duration: 43,
+  standardTemperature: 32,
+  videoLink: 'https://you.tu/243423dsdasddds/',
+}
+
+let ingredietsCreated: IngredientAttributes[]
+let techniquesCreated: TechniqueAttributes[]
 
 const ingredient = new Ingredient(db)
+const technique = new Technique(db)
 
 beforeAll(async () => {
   ingredietsCreated = await ingredient.create([dummyIngredient, dummyIngredient, dummyIngredient])
+  techniquesCreated = await technique.create([dummyTechnique])
 })
 
 afterAll(async () => {
@@ -45,22 +57,39 @@ afterAll(async () => {
 })
 
 describe('Test the Recipe service', () => {
-  test('should create a new Recipe', async (done) => {
+  test('should create a new Recipe', async () => {
     const recipe = new Recipe(db)
     let newRecipe
     try {
       newRecipe = await recipe.create({
-        name: dummyRecipe.name,
+        key: dummyRecipe.key,
         title: dummyRecipe.title,
         description: dummyRecipe.description,
         author: dummyRecipe.author,
         ingredients: ingredietsCreated.map((i) => ({ id: i.id!, amount: 200 })),
+        techniques: techniquesCreated.map((technique) => ({
+          id: technique.id!,
+          duration: technique.description!,
+          idealTemperature: technique.standardTemperature!,
+        })),
       })
-      expect(newRecipe).toHaveProperty('id')
-      done()
     } catch (e) {
       console.log(e)
-      done()
     }
+    expect(newRecipe).toHaveProperty('id')
+  })
+
+  test('should find all the Recipes', async () => {
+    const recipe = new Recipe(db)
+    let foundRecipes: any
+    try {
+      foundRecipes = await recipe.find({})
+    } catch (e) {
+      console.log(e)
+    }
+    expect(foundRecipes[0]).toHaveProperty('title')
+    expect(foundRecipes[0]).toHaveProperty('id')
+    expect(foundRecipes[0]).toHaveProperty('ingredients')
+    expect(foundRecipes[0].techniques[0]).toHaveProperty('duration')
   })
 })

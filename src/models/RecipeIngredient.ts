@@ -3,7 +3,7 @@ import { SequelizeAttributes } from '../typings/SequelizeAttributes'
 export interface RecipeIngredientAttributes {
   recipeId?: string
   ingredientId?: string
-  amount: number
+  amount?: number
   createdAt?: Date
   updatedAt?: Date
 }

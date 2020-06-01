@@ -3,20 +3,18 @@ import { SequelizeAttributes } from '../typings/SequelizeAttributes'
 import { IngredientInstance, IngredientAttributes } from './Ingredient'
 import { TechniqueInstance, TechniqueAttributes } from './Technique'
 import { RecipeTechniqueAttributes } from './RecipeTechnique'
+import { RecipeIngredientAttributes } from './RecipeIngredient'
 export interface RecipeAttributes {
   id?: string
-  name: string
+  key: string
   title: string
   author: string
   description: string
   updatedAt?: Date
+  ingredients?: RecipeIngredientAttributes
+  techniques?: RecipeTechniqueAttributes
 }
-interface RecipeIngredientAttributes {
-  recipeId?: string
-  ingredientId?: string
-  amount: number
-  updatedAt?: Date
-}
+
 export interface RecipeInstance extends Sequelize.Instance<RecipeAttributes>, RecipeAttributes {
   getIngredients: Sequelize.BelongsToManyGetAssociationsMixin<IngredientInstance>
   setIngredients: Sequelize.BelongsToManySetAssociationsMixin<
@@ -83,7 +81,7 @@ export const RecipeFactory = (
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    name: {
+    key: {
       type: DataTypes.STRING,
       allowNull: false,
     },

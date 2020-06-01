@@ -5,7 +5,7 @@ import config from '../../../config/config.json'
 const db = createModels(config)
 
 const dummyIngredient = {
-  name: 'Flour',
+  key: 'Flour',
   title: 'flour',
   description: 'white dust',
 }

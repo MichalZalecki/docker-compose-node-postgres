@@ -1,4 +1,4 @@
 NODE_ENV="test"
-npm run migrations:undo
-npm run migrations:test --watch
-jest
+npx sequelize db:migrate:undo:all --env test
+npx sequelize db:migrate --env test
+jest --watch

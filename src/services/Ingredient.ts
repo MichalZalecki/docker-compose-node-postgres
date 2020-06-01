@@ -1,20 +1,8 @@
 import { DBInterface } from '../typings/DbInterface'
-import { IngredientInstance } from '../models/Ingredient'
+import { IngredientAttributes } from '../models/Ingredient'
 import ErrorGenerator from '../error'
 
-export interface IngredientCreateInterface {
-  id?: string
-  name: string
-  title: string
-  description: string
-}
-
-interface ingredientFindInterface {
-  id?: string
-  name?: string
-  title?: string
-  description?: string
-}
+export interface ingredientFindParams extends Partial<IngredientAttributes> {}
 
 export default class Ingredient {
   private db: DBInterface
@@ -23,25 +11,27 @@ export default class Ingredient {
     this.db = db
   }
 
-  async find(params?: ingredientFindInterface): Promise<IngredientInstance[]> {
+  async find(params?: ingredientFindParams, paramInJoinTable?: any): Promise<IngredientAttributes[]> {
     try {
-      const ingredientFound = await this.db.Ingredient.findAll({ where: params })
-      return ingredientFound
+      const ingredientFound = await this.db.Ingredient.findAll({
+        where: params,
+      })
+      return ingredientFound.map((el) => el.get({ plain: true }))
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e)
+      throw new Error(e)
     }
   }
 
-  async create(ingredients: IngredientCreateInterface[]): Promise<IngredientInstance[]> {
+  async create(ingredients: IngredientAttributes[]): Promise<IngredientAttributes[]> {
     if (!ingredients || !ingredients.length) {
-      throw new ErrorGenerator('Server.internal')
+      throw new ErrorGenerator('Validation.rejected')
     }
 
     try {
-      const newIngredients = this.db.Ingredient.bulkCreate(ingredients)
+      const newIngredients = this.db.Ingredient.bulkCreate(ingredients).map((el) => el.get({ plain: true }))
       return newIngredients
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e)
+      throw new Error(e)
     }
   }
 }
