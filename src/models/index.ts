@@ -9,8 +9,8 @@ import { getEnv } from '../helpers/getEnv'
 import { Env } from '../typings/Env'
 
 export const createModels = (sequelizeConfig: Env): DBInterface => {
-  const { dialectOptions } = sequelizeConfig[getEnv()]
-  const sequelize = new Sequelize(process.env.DATABASE_URL!, { dialectOptions })
+  const { dialectOptions, logging } = sequelizeConfig[getEnv()]
+  const sequelize = new Sequelize(process.env.DATABASE_URL!, { dialectOptions, logging })
 
   const db: DBInterface = {
     sequelize,
