@@ -10,6 +10,6 @@ RUN npm ci
 
 COPY . /home/app
 
-RUN npm run migratations
-RUN npm test
+RUN npm run migrations
 
+RUN npm run dev

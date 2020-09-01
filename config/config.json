@@ -1,0 +1,32 @@
+{
+    "development": {
+        "username": "postgres",
+        "password": "ciccioippolitoinmyheart",
+        "database": "bread",
+        "host": "bread.cbpvelvune15.eu-west-2.rds.amazonaws.com",
+        "port": "5432",
+        "dialect": "postgres",
+        "operatorsAliases": false,
+        "logging": true
+    },
+    "test": {
+        "username": "postgres",
+        "password": "postgres",
+        "database": "postgres",
+        "host": "127.0.0.1",
+        "port": "5432",
+        "dialect": "postgres",
+        "operatorsAliases": false,
+        "logging": true
+    },
+    "production": {
+        "username": "ergo-guest",
+        "password": "dffsf",
+        "database": "database_production",
+        "host": "127.0.0.1",
+        "port": "5432",
+        "dialect": "postgres",
+        "operatorsAliases": false,
+        "logging": false
+    }
+}
