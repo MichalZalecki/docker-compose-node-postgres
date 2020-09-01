@@ -7,7 +7,12 @@
         "port": "5432",
         "dialect": "postgres",
         "operatorsAliases": false,
-        "logging": true
+        "logging": true,
+        "dialectOptions": {
+            "ssl": {
+                "rejectUnauthorized": false
+            }
+        }
     },
     "test": {
         "username": "postgres",
@@ -20,13 +25,17 @@
         "logging": true
     },
     "production": {
-        "username": "ergo-guest",
-        "password": "dffsf",
-        "database": "database_production",
-        "host": "127.0.0.1",
+        "username": "postgres",
+        "password": "ciccioippolitoinmyheart",
+        "database": "bread",
+        "host": "bread.cbpvelvune15.eu-west-2.rds.amazonaws.com",
         "port": "5432",
         "dialect": "postgres",
         "operatorsAliases": false,
-        "logging": false
-    }
+        "logging": true,
+        "dialectOptions": {
+            "ssl": {
+                "rejectUnauthorized": false
+            }
+        }
 }

@@ -7,6 +7,11 @@ export interface Config {
   dialect: string
   operatorsAliases: boolean
   logging: boolean
+  dialectOptions?:{
+    ssl:{
+      rejectUnauthorized: boolean
+    }
+  }
 }
 
 export interface Env {
