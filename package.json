@@ -7,6 +7,7 @@
     "dev": "concurrently \"npm run build:watch\" \"npm run start:dev\"",
     "start:dev": "nodemon dist/src/index.js",
     "build": "tsc",
+    "start": "node dist/src/index.js",
     "build:watch": "tsc -w",
     "migrations": "npx sequelize db:migrate",
     "migrations:undo": "npx sequelize db:migrate:undo:all",
