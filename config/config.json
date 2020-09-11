@@ -1,25 +1,25 @@
 {
   "development": {
     "username": "postgres",
-    "password": "",
+    "password": "password",
     "database": "bread",
-    "host": "127.0.0.1",
+    "host": "host.docker.internal",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "test": {
-    "username": "root",
-    "password": "",
+    "username": "postgres",
+    "password": "password",
     "database": "bread",
-    "host": "127.0.0.1",
+    "host": "host.docker.internal",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
-    "password": "",
+    "username": "postgres",
+    "password": "password",
     "database": "bread",
-    "host": "127.0.0.1",
+    "host": "host.docker.internal",
     "dialect": "postgres",
     "operatorsAliases": false
   }

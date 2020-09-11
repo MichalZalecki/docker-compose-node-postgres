@@ -8,7 +8,6 @@ interface RecipeIngredientAttributes {
   amount: number
   updatedAt?: Date
 }
-
 export interface IngredientAttributes {
   id?: string
   key: string
