@@ -17,4 +17,4 @@ ENV NODE_ENV=development
 
 CMD [ "npm", "run", "dev" ]
 
-EXPOSE 8080
+EXPOSE 4000

@@ -2,7 +2,10 @@ version: "3"
 services:
   postgres-db:
     container_name: postgres-db
-    env_file: ./.env.postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: bread
     image: postgres:alpine
     restart: always
     env_file:
@@ -15,6 +18,8 @@ services:
     build:
       context: .
       dockerfile: ./.Dockerfile
+    volumes:
+      - ./src:/usr/src/app/src
     depends_on:
       - postgres-db
     ports:
