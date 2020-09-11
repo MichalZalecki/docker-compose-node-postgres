@@ -15,6 +15,6 @@ RUN node_modules/.bin/sequelize db:migrate
 
 ENV NODE_ENV=development
 
-RUN npm run dev
+CMD [ "npm", "run", "dev" ]
 
 EXPOSE 8080

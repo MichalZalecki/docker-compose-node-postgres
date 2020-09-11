@@ -1,18 +1,5 @@
 version: "3"
 services:
-  app:
-    container_name: app
-    build:
-      context: .
-      dockerfile: ./.Dockerfile
-    depends_on:
-      - postgres-db
-    ports:
-      - "8080:8080"
-    env_file:
-      - ./.env
-    command: npm run dev
-
   postgres-db:
     container_name: postgres-db
     env_file: ./.env.postgres
@@ -22,3 +9,13 @@ services:
       - ./.env.postgres
     ports:
       - "5432:5432"
+
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: ./.Dockerfile
+    depends_on:
+      - postgres-db
+    ports:
+      - "4000:4000"
