@@ -9,9 +9,17 @@ import { getEnv } from '../helpers/getEnv'
 import { Env } from '../typings/Env'
 
 export const createModels = (sequelizeConfig: Env): DBInterface => {
-  const { dialectOptions, logging } = sequelizeConfig[getEnv()]
-  const sequelize = new Sequelize(process.env.DATABASE_URL!, { dialectOptions, logging })
-  console.log(process.env.DATABASE_URL!)
+  const { database, username, password, dialect, host } = sequelizeConfig[getEnv()]
+  function getSequelizeParams (){
+    if(process.env.NODE_ENV === 'production'){
+      return new Sequelize(process.env.DATABASE_URL as string, { dialectOptions: 'postgres', logging: true })
+    } else {
+      return new Sequelize(database, username, password, { dialect, host })
+    }
+  }
+
+  const sequelize = getSequelizeParams()
+
   const db: DBInterface = {
     sequelize,
     Sequelize,

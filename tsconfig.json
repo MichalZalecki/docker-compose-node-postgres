@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "types": ["node", "express", "sequelize", "jest", "graphql"],
-    "target": "es2016",
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "./dist",

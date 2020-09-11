@@ -3,15 +3,8 @@ export interface Config {
   password: string
   database: string
   host: string
-  port: string
   dialect: string
   operatorsAliases: boolean
-  logging: boolean
-  dialectOptions?:{
-    ssl:{
-      rejectUnauthorized: boolean
-    }
-  }
 }
 
 export interface Env {

@@ -1,42 +1,26 @@
 {
-    "development": {
-        "username": "postgres",
-        "password": "ciccioippolitoinmyheart",
-        "database": "bread",
-        "host": "bread.cbpvelvune15.eu-west-2.rds.amazonaws.com",
-        "port": "5432",
-        "dialect": "postgres",
-        "operatorsAliases": false,
-        "logging": true,
-        "dialectOptions": {
-            "ssl": {
-                "rejectUnauthorized": false
-            }
-        }
-    },
-    "test": {
-        "username": "postgres",
-        "password": "postgres",
-        "database": "postgres",
-        "host": "127.0.0.1",
-        "port": "5432",
-        "dialect": "postgres",
-        "operatorsAliases": false,
-        "logging": true
-    },
-    "production": {
-        "username": "postgres",
-        "password": "ciccioippolitoinmyheart",
-        "database": "bread",
-        "host": "bread.cbpvelvune15.eu-west-2.rds.amazonaws.com",
-        "port": "5432",
-        "dialect": "postgres",
-        "operatorsAliases": false,
-        "logging": true,
-        "dialectOptions": {
-            "ssl": {
-                "rejectUnauthorized": false
-            }
-        }
-    }
+  "development": {
+    "username": "postgres",
+    "password": "",
+    "database": "bread",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "root",
+    "password": "",
+    "database": "bread",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "root",
+    "password": "",
+    "database": "bread",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
 }
