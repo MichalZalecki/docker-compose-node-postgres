@@ -3,7 +3,6 @@ type Ingredient {
   id: ID!
   title: String
   key: String
-  amount: Float!
   description: String
   createdAt: String
   updatedAt: String

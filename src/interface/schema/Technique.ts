@@ -13,7 +13,7 @@ type Technique {
 
 input TechniquePayloadInput{
   title: String!
-  key: String
+  key: String!
   description: String!
   duration: Float!
   videoLink: String

@@ -1,4 +1,4 @@
 node_modules
 dist
+db-volume/
 db-config.json
-src/interface/schema/index.graphql

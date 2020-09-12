@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm run build:watch\" \"npm run start:dev\"",
-    "start:dev": "node dist/src/",
+    "start:dev": "nodemon dist/src/",
     "build": "tsc",
     "start": "node dist/src/",
     "build:watch": "tsc -w",
