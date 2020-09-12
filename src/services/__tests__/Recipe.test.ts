@@ -2,7 +2,7 @@ import Recipe from '../Recipe'
 import Ingredient from '../Ingredient'
 import Technique from '../Technique'
 
-import { createModels } from '../../models'
+import createModels from  '../../models'
 import config from '../../../config/config.json'
 import { IngredientAttributes } from '../../models/Ingredient'
 import { TechniqueAttributes } from '../../models/Technique'

@@ -1,4 +1,4 @@
-import { DataTypeAbstract, DefineAttributeColumnOptions } from 'sequelize'
+import { DataTypeAbstract, DefineAttributeColumnOptions } from 'sequelize';
 
 type SequelizeAttribute = string | DataTypeAbstract | DefineAttributeColumnOptions
 

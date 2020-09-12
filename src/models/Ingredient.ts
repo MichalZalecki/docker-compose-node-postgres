@@ -1,6 +1,6 @@
-import * as Sequelize from 'sequelize'
-import { SequelizeAttributes } from '../typings/SequelizeAttributes'
-import { RecipeAttributes, RecipeInstance } from './Recipe'
+import * as Sequelize from 'sequelize';
+import { SequelizeAttributes } from '../typings/SequelizeAttributes';
+import { RecipeAttributes, RecipeInstance } from './Recipe';
 
 interface RecipeIngredientAttributes {
   recipeId: string
@@ -18,7 +18,8 @@ export interface IngredientAttributes {
   updatedAt?: Date
 }
 
-export interface IngredientInstance extends Sequelize.Instance<IngredientAttributes>, IngredientAttributes {
+export interface IngredientInstance
+  extends Sequelize.Instance<IngredientAttributes>, IngredientAttributes {
   getRecipes: Sequelize.BelongsToManyGetAssociationsMixin<RecipeInstance>
   setRecipes: Sequelize.BelongsToManySetAssociationsMixin<
     RecipeInstance,
@@ -49,7 +50,7 @@ export interface IngredientInstance extends Sequelize.Instance<IngredientAttribu
 
 export const IngredientFactory = (
   sequelize: Sequelize.Sequelize,
-  DataTypes: Sequelize.DataTypes
+  DataTypes: Sequelize.DataTypes,
 ): Sequelize.Model<IngredientInstance, IngredientAttributes> => {
   const attributes: SequelizeAttributes<IngredientAttributes> = {
     id: {
@@ -72,12 +73,12 @@ export const IngredientFactory = (
     updatedAt: {
       type: DataTypes.DATE,
     },
-  }
+  };
 
   const Ingredient = sequelize.define<IngredientInstance, IngredientAttributes>('Ingredient', attributes, {
     tableName: 'Ingredient',
     freezeTableName: true,
-  })
+  });
 
   Ingredient.associate = (models): void => {
     Ingredient.belongsToMany(models.Recipe, {
@@ -85,8 +86,8 @@ export const IngredientFactory = (
       foreignKey: 'ingredientId',
       as: 'recipes',
       otherKey: 'recipeId',
-    })
-  }
+    });
+  };
 
-  return Ingredient
-}
+  return Ingredient;
+};

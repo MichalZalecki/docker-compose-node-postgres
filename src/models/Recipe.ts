@@ -1,9 +1,10 @@
-import sequelize, * as Sequelize from 'sequelize'
-import { SequelizeAttributes } from '../typings/SequelizeAttributes'
-import { IngredientInstance, IngredientAttributes } from './Ingredient'
-import { TechniqueInstance, TechniqueAttributes } from './Technique'
-import { RecipeTechniqueAttributes } from './RecipeTechnique'
-import { RecipeIngredientAttributes } from './RecipeIngredient'
+import * as Sequelize from 'sequelize';
+import { SequelizeAttributes } from '../typings/SequelizeAttributes';
+import { IngredientInstance, IngredientAttributes } from './Ingredient';
+import { TechniqueInstance, TechniqueAttributes } from './Technique';
+import { RecipeTechniqueAttributes } from './RecipeTechnique';
+import { RecipeIngredientAttributes } from './RecipeIngredient';
+
 export interface RecipeAttributes {
   id?: string
   key: string
@@ -73,7 +74,7 @@ export interface RecipeInstance extends Sequelize.Instance<RecipeAttributes>, Re
 
 export const RecipeFactory = (
   sequelize: Sequelize.Sequelize,
-  DataTypes: Sequelize.DataTypes
+  DataTypes: Sequelize.DataTypes,
 ): Sequelize.Model<RecipeInstance, RecipeAttributes> => {
   const attributes: SequelizeAttributes<RecipeAttributes> = {
     id: {
@@ -101,11 +102,11 @@ export const RecipeFactory = (
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
-  }
+  };
   const Recipe = sequelize.define<RecipeInstance, RecipeAttributes>('Recipe', attributes, {
     tableName: 'Recipe',
     freezeTableName: true,
-  })
+  });
 
   Recipe.associate = (models): void => {
     Recipe.belongsToMany(models.Ingredient, {
@@ -113,14 +114,14 @@ export const RecipeFactory = (
       foreignKey: 'recipeId',
       as: 'ingredients',
       otherKey: 'ingredientId',
-    })
+    });
 
     Recipe.belongsToMany(models.Technique, {
       through: models.RecipeTechnique,
       foreignKey: 'recipeId',
       as: 'techniques',
       otherKey: 'techniqueId',
-    })
-  }
-  return Recipe
-}
+    });
+  };
+  return Recipe;
+};

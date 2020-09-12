@@ -1,5 +1,6 @@
-import sequelize, * as Sequelize from 'sequelize'
-import { SequelizeAttributes } from '../typings/SequelizeAttributes'
+import * as Sequelize from 'sequelize';
+import { SequelizeAttributes } from '../typings/SequelizeAttributes';
+
 export interface RecipeIngredientAttributes {
   recipeId?: string
   ingredientId?: string
@@ -14,7 +15,7 @@ export interface RecipeIngredientInstance
 
 export const RecipeIngredientFactory = (
   sequelize: Sequelize.Sequelize,
-  DataTypes: Sequelize.DataTypes
+  DataTypes: Sequelize.DataTypes,
 ): Sequelize.Model<RecipeIngredientInstance, RecipeIngredientAttributes> => {
   const attributes: SequelizeAttributes<RecipeIngredientAttributes> = {
     recipeId: {
@@ -39,15 +40,15 @@ export const RecipeIngredientFactory = (
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
-  }
+  };
   const RecipeIngredient = sequelize.define<RecipeIngredientInstance, RecipeIngredientAttributes>(
     'RecipeIngredient',
     attributes,
     {
       tableName: 'RecipeIngredient',
       freezeTableName: true,
-    }
-  )
+    },
+  );
 
-  return RecipeIngredient
-}
+  return RecipeIngredient;
+};

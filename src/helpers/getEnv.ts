@@ -1,9 +1,10 @@
-import { EnvValue } from '../typings/Env'
+import { EnvValue } from '../typings/Env';
 
-export const getEnv = (): EnvValue => {
+const getEnv = (): EnvValue => {
   if (!process.env.NODE_ENV) {
-    return 'development'
-  } else {
-    return process.env.NODE_ENV as EnvValue
+    return 'development';
   }
-}
+  return process.env.NODE_ENV as EnvValue;
+};
+
+export default getEnv;

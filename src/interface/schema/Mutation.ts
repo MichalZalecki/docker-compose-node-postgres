@@ -3,5 +3,5 @@ const mutation = `type Mutation {
   createIngredients(ingredientsPayload: [IngredientPayloadInput]): [Ingredient]!
   createTechniques(techniquesPayload: [TechniquePayloadInput]): [Technique]!
 }
-`
-export { mutation as default }
+`;
+export { mutation as default };

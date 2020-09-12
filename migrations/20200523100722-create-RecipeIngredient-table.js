@@ -1,54 +1,48 @@
-'use strict'
-
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable(
-      'RecipeIngredient',
-      {
-        recipeId: {
-          type: Sequelize.UUID,
-          references: {
-            model: 'Recipe',
-            key: 'id',
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'SET NULL',
-          primaryKey: true,
-          allowNull: false,
+  up: (queryInterface, Sequelize) => queryInterface.createTable(
+    'RecipeIngredient',
+    {
+      recipeId: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'Recipe',
+          key: 'id',
         },
-        ingredientId: {
-          type: Sequelize.UUID,
-          references: {
-            model: 'Ingredient',
-            key: 'id',
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'SET NULL',
-          primaryKey: true,
-          allowNull: false,
-        },
-        amount: {
-          type: Sequelize.FLOAT,
-          allowNull: false,
-        },
-        createdAt: {
-          type: Sequelize.DATE,
-          defaultValue: Sequelize.NOW,
-          allowNull: false,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-          allowNull: true,
-        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        primaryKey: true,
+        allowNull: false,
       },
-      {
-        freezeTableName: true,
-        tableName: 'RecipeIngredient',
-      }
-    )
-  },
+      ingredientId: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'Ingredient',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        primaryKey: true,
+        allowNull: false,
+      },
+      amount: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        allowNull: false,
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+    },
+    {
+      freezeTableName: true,
+      tableName: 'RecipeIngredient',
+    },
+  ),
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('RecipeIngredient')
-  },
-}
+  down: (queryInterface) => queryInterface.dropTable('RecipeIngredient'),
+};

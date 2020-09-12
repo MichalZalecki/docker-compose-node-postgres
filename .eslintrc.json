@@ -1,0 +1,45 @@
+{
+    "env": {
+        "browser": true,
+        "es2020": true,
+        "jest/globals": true
+
+    },
+    "extends": [
+        "airbnb-base"
+    ],
+    "settings": {
+        "import/resolver": {
+          "node": {
+            "extensions": [
+              ".js",
+              ".jsx",
+              ".ts",
+              ".d.ts",
+              ".tsx"
+            ]
+          }
+        }
+      },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "jest"
+    ],
+    "rules": {
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "js": "never",
+          "jsx": "never",
+          "ts": "never",
+          "tsx": "never"
+        }
+     ]
+    }
+}

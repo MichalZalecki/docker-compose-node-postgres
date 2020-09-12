@@ -1,5 +1,5 @@
-import * as Sequelize from 'sequelize'
-import { SequelizeAttributes } from '../typings/SequelizeAttributes'
+import * as Sequelize from 'sequelize';
+import { SequelizeAttributes } from '../typings/SequelizeAttributes';
 
 export interface TechniqueAttributes {
   id?: string
@@ -13,11 +13,12 @@ export interface TechniqueAttributes {
   updatedAt?: Date
 }
 
-export interface TechniqueInstance extends Sequelize.Instance<TechniqueAttributes>, TechniqueAttributes {}
+export interface TechniqueInstance
+  extends Sequelize.Instance<TechniqueAttributes>, TechniqueAttributes {}
 
 export const TechniqueFactory = (
   sequelize: Sequelize.Sequelize,
-  DataTypes: Sequelize.DataTypes
+  DataTypes: Sequelize.DataTypes,
 ): Sequelize.Model<TechniqueInstance, TechniqueAttributes> => {
   const attributes: SequelizeAttributes<TechniqueAttributes> = {
     id: {
@@ -47,12 +48,12 @@ export const TechniqueFactory = (
     duration: {
       type: DataTypes.STRING,
     },
-  }
+  };
 
   const Technique = sequelize.define<TechniqueInstance, TechniqueAttributes>('Technique', attributes, {
     tableName: 'Technique',
     freezeTableName: true,
-  })
+  });
 
   Technique.associate = (models): void => {
     Technique.belongsToMany(models.Recipe, {
@@ -60,8 +61,8 @@ export const TechniqueFactory = (
       foreignKey: 'techniqueId',
       as: 'techniques',
       otherKey: 'recipeId',
-    })
-  }
+    });
+  };
 
-  return Technique
-}
+  return Technique;
+};

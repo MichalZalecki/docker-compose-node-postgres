@@ -32,5 +32,5 @@ type TechniqueInRecipe {
   idealTemperature: Float
 }
 
-`
-export { recipeTypeDef as default }
+`;
+export { recipeTypeDef as default };

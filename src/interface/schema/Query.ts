@@ -4,5 +4,5 @@ type Query {
   ingredients: [Ingredient]
   techniques: [Technique]
 }
-`
-export { queryTypeDef as default }
+`;
+export { queryTypeDef as default };

@@ -1,6 +1,6 @@
 import Technique from '../Technique'
 
-import { createModels } from '../../models'
+import createModels from  '../../models'
 import config from '../../../config/config.json'
 const db = createModels(config)
 

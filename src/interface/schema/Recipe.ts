@@ -37,5 +37,5 @@ type RecipeSaved {
   description: String
   author: String
 }
-`
-export { recipeTypeDef as default }
+`;
+export { recipeTypeDef as default };

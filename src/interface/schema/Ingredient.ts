@@ -23,5 +23,5 @@ type IngredientInRecipe {
   id: ID!
   amount: Float!
 }
-`
-export { ingredientTypeDef as default }
+`;
+export { ingredientTypeDef as default };
