@@ -9,6 +9,7 @@ export interface TechniqueAttributes {
   duration: number
   standardTemperature?: number
   videoLink?: string
+  userId?: string
   createdAt?: Date
   updatedAt?: Date
 }

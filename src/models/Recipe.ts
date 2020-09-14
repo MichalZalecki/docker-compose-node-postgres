@@ -9,9 +9,10 @@ export interface RecipeAttributes {
   id?: string
   key: string
   title: string
-  author: string
+  userId: string
   description: string
   updatedAt?: Date
+  userId?: string
   ingredients?: RecipeIngredientAttributes
   techniques?: RecipeTechniqueAttributes
 }
@@ -94,7 +95,7 @@ export const RecipeFactory = (
       type: DataTypes.STRING(700),
       allowNull: true,
     },
-    author: {
+    userId: {
       type: DataTypes.STRING,
       allowNull: true,
     },

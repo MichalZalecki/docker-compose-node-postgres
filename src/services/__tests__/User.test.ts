@@ -21,14 +21,14 @@ afterEach(async () => {
 describe('Test the User service', () => {
   test('should create multiple user in the db', async () => {
     const user = new User(db)
-    const userCreated = await user.create(dummyUser)
+    const userCreated = await user.createIfNotExists(dummyUser)
     expect(userCreated.id).toBe(dummyUser.id)
     expect(userCreated).toHaveProperty('name')
   })
 
   test('Should find the user', async () => {
     const user = new User(db)
-    await user.create(dummyUser)
+    await user.createIfNotExists(dummyUser)
     const userFound = await user.find({id: dummyUser.id})
     expect(userFound.id).toBe(dummyUser.id)
     expect(userFound).toHaveProperty('name')

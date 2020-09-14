@@ -5,7 +5,7 @@ const recipe1 = {
   key: 'bread',
   title: 'bread',
   description: 'put all the stuff',
-  author: 'myself',
+  userId: 'myself',
   updatedAt: new Date(),
   createdAt: new Date(),
   ingredients: [],
@@ -17,7 +17,7 @@ const recipe2 = {
   key: 'bread',
   title: 'bread',
   description: 'put all the stuff',
-  author: 'myself',
+  userId: 'myself',
   updatedAt: new Date(),
   createdAt: new Date(),
   ingredients: [

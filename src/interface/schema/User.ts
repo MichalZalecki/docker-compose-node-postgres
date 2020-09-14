@@ -3,6 +3,9 @@ type User {
   id: ID!
   name: String!
   email: String
+  ingredients: [Ingredient]
+  techniques: [Technique]
+  recipes: [Recipe]
   createdAt: String
   updatedAt: String
 }

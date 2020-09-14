@@ -34,13 +34,10 @@ interface RecipeIngredientMappedToApi extends Omit<RecipeIngredientAttributes, '
   id: string
 }
 
-interface UserParams{
-  id: string
-}
 export interface RecipeMappedToApi extends Omit<Partial<RecipeAttributes>, 'ingredients' | 'techniques'> {
   ingredients: RecipeIngredientMappedToApi[]
   techniques: RecipeTechniqueMappedToApi[]
-  user: UserParams
+  userId: string
 }
 
 export default class Recipe {
@@ -66,7 +63,7 @@ export default class Recipe {
     try {
       const { findParams, paginationParams } = mapQueryParams(
         params,
-        ['id', 'key', 'title', 'description', 'author'],
+        ['id', 'key', 'title', 'description', 'userId'],
         ['limit', 'page']
       )
       const recipesFound = await this.db.Recipe.findAll({
@@ -101,7 +98,7 @@ export default class Recipe {
         key: recipe.key!,
         title: recipe.title!,
         description: recipe.description!,
-        author: recipe.author!,
+        userId: recipe.userId!,
       })
       if (recipe.ingredients && recipe.ingredients.length) {
         const ingredients = recipe.ingredients.map((ing) => ({

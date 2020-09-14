@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING(700),
         allowNull: true,
       },
-      author: {
+      userId: {
         type: Sequelize.STRING,
         allowNull: true,
       },

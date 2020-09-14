@@ -11,7 +11,7 @@ export default class Ingredient {
     this.db = db
   }
 
-  async find(params?: IngredientFindParams, paramInJoinTable?: any): Promise<IngredientAttributes[]> {
+  async find(params?: IngredientFindParams): Promise<IngredientAttributes[]> {
     try {
       const ingredientFound = await this.db.Ingredient.findAll({
         where: params,

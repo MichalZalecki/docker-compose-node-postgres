@@ -1,6 +1,8 @@
 const recipeTypeDef = `
 type Technique {
   id: ID!
+  user: [User]
+  recipes: [Recipe]
   title: String
   key: String
   description: String
@@ -12,6 +14,7 @@ type Technique {
 }
 
 input TechniquePayloadInput{
+  userId: String!
   title: String!
   key: String!
   description: String!
