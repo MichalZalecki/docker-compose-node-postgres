@@ -22,4 +22,11 @@ export default {
       e.logError()
     }
   },
+  registerOrLoginUser(parent: any, args: Args, { service }: Context) {
+    try {
+      return service.user.create(args.userPayload)
+    } catch (e) {
+      e.logError()
+    }
+  },
 }

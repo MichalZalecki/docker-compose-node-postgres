@@ -6,9 +6,8 @@ import { RecipeTechniqueAttributes } from '../models/RecipeTechnique'
 import { mapRecipe, mapQueryParams } from './helpers/mapper'
 import { IngredientAttributes } from '../models/Ingredient'
 import { TechniqueAttributes } from '../models/Technique'
-import { title } from 'process'
 
-export interface recipeFindParams extends Partial<RecipeAttributes> {
+export interface RecipeFindParams extends Partial<RecipeAttributes> {
   page?: number
   limit?: number
 }
@@ -34,9 +33,14 @@ interface RecipeIngredientMappedToApi extends Omit<RecipeIngredientAttributes, '
   amount: number
   id: string
 }
+
+interface UserParams{
+  id: string
+}
 export interface RecipeMappedToApi extends Omit<Partial<RecipeAttributes>, 'ingredients' | 'techniques'> {
   ingredients: RecipeIngredientMappedToApi[]
   techniques: RecipeTechniqueMappedToApi[]
+  user: UserParams
 }
 
 export default class Recipe {
@@ -58,7 +62,7 @@ export default class Recipe {
     }
   }
 
-  async find(params: recipeFindParams): Promise<(RecipeMappedToApi | null)[]> {
+  async find(params: RecipeFindParams): Promise<(RecipeMappedToApi | null)[]> {
     try {
       const { findParams, paginationParams } = mapQueryParams(
         params,

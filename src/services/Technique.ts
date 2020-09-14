@@ -2,7 +2,7 @@ import { DBInterface } from '../typings/DbInterface'
 import { TechniqueAttributes } from '../models/Technique'
 import ErrorGenerator from '../error'
 
-export interface techniqueFindParams extends Partial<Omit<TechniqueAttributes, 'videoLink'>> {}
+export interface TechniqueFindParams extends Partial<Omit<TechniqueAttributes, 'videoLink'>> {}
 
 export default class Technique {
   private db: DBInterface
@@ -11,7 +11,7 @@ export default class Technique {
     this.db = db
   }
 
-  async find(params?: techniqueFindParams): Promise<techniqueFindParams[]> {
+  async find(params?: TechniqueFindParams): Promise<TechniqueFindParams[]> {
     try {
       const techniquesFound = await this.db.Technique.findAll({ where: params })
       return techniquesFound.map((el) => el.get({ plain: true }))

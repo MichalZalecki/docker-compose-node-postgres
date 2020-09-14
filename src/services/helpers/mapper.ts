@@ -1,8 +1,8 @@
 import {
-  RecipeMappedToApi, RecipeFromDB, ingredientFromDB, techniqueFromDB, recipeFindParams,
+  RecipeMappedToApi, RecipeFromDB, ingredientFromDB, techniqueFromDB, RecipeFindParams,
 } from '../Recipe';
-import { ingredientFindParams } from '../Ingredient';
-import { techniqueFindParams } from '../Technique';
+import { IngredientFindParams } from '../Ingredient';
+import { TechniqueFindParams } from '../Technique';
 
 function mapIngredient(ingredients: ingredientFromDB[]) {
   if (!ingredients || !ingredients.length) return ingredients;
@@ -33,7 +33,7 @@ export function mapRecipe(recipe: RecipeFromDB | any): RecipeMappedToApi | null 
 }
 
 export function mapQueryParams(
-  params: recipeFindParams & ingredientFindParams & techniqueFindParams,
+  params: RecipeFindParams & IngredientFindParams & TechniqueFindParams,
   findParamsKeys: string[],
   paginationsParamsKeys: string[],
 ): any {
