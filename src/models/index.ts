@@ -5,6 +5,7 @@ import { RecipeFactory } from './Recipe';
 import { RecipeIngredientFactory } from './RecipeIngredient';
 import { RecipeTechniqueFactory } from './RecipeTechnique';
 import { TechniqueFactory } from './Technique';
+import { UserFactory } from './User';
 import getEnv from '../helpers/getEnv';
 import { Env } from '../typings/Env';
 
@@ -29,6 +30,7 @@ const createModels = (sequelizeConfig: Env): DBInterface => {
     Technique: TechniqueFactory(sequelize, Sequelize),
     RecipeIngredient: RecipeIngredientFactory(sequelize, Sequelize),
     RecipeTechnique: RecipeTechniqueFactory(sequelize, Sequelize),
+    User: UserFactory(sequelize, Sequelize),
   };
 
   Object.keys(db).forEach((modelName) => {

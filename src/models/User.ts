@@ -44,13 +44,13 @@ export const UserFactory = (
       as: 'Recipies',
     });
 
-    User.hasMany(models.Ingredients, {
+    User.hasMany(models.Ingredient, {
       sourceKey: 'id',
       foreignKey: 'userId',
       as: 'Ingredients',
     });
 
-    User.hasMany(models.Techniques, {
+    User.hasMany(models.Technique, {
       sourceKey: 'id',
       foreignKey: 'userId',
       as: 'Techniques',

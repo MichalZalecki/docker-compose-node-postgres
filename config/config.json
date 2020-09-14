@@ -13,7 +13,8 @@
     "database": "bread",
     "host": "host.docker.internal",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "logging": false
   },
   "production": {
     "username": "postgres",
