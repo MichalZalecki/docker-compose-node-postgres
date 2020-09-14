@@ -18,8 +18,7 @@ export const UserFactory = (
 ): Sequelize.Model<UserInstance, UserAttributes> => {
   const attributes: SequelizeAttributes<UserAttributes> = {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.STRING,
       primaryKey: true,
     },
     name: {
