@@ -76,19 +76,14 @@ describe('Mappers should work', () => {
 
   test('should map find and pagination params', async () => {
     const mapped = mapQueryParams(queryParams, ['title', 'description', 'duration'], ['limit', 'page']);
-    // @ts-ignore
     expect(mapped.findParams.description).toBeDefined();
-    // @ts-ignore
     expect(mapped.findParams.description).toBeDefined();
-    // @ts-ignore
     expect(mapped.paginationParams.limit).toBeDefined();
   });
 
   test('should map find and pagination params', async () => {
     const mapped = mapQueryParams({}, ['title', 'description', 'duration'], ['limit', 'page']);
-    // @ts-ignore
     expect(mapped.findParams).toEqual({});
-    // @ts-ignore
     expect(mapped.paginationParams).toEqual({});
   });
 });
