@@ -13,13 +13,14 @@
     "database": "bread",
     "host": "host.docker.internal",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "logging": false
   },
   "production": {
-    "username": "postgres",
-    "password": "password",
-    "database": "bread",
-    "host": "host.docker.internal",
+    "username": "elkovybwaftneu",
+    "password": "d61d01ba9014e999cec175c2e5826311d0a0178a4265fdf5b3baaadb4d5b6255",
+    "database": "d9hffjee281tou",
+    "host": "ec2-54-246-85-151.eu-west-1.compute.amazonaws.com",
     "dialect": "postgres",
     "operatorsAliases": false
   }
