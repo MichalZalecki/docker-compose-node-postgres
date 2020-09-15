@@ -9,7 +9,6 @@ export interface RecipeAttributes {
   id?: string
   key: string
   title: string
-  userId: string
   description: string
   updatedAt?: Date
   userId?: string

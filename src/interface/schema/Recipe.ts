@@ -8,7 +8,6 @@ type Recipe {
   ingredients: [Ingredient]!
   user: User
   description: String!
-  userId: String!
   createdAt: String
   updatedAt: String
 }
