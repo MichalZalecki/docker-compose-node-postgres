@@ -21,10 +21,6 @@ module.exports = {
         type: Sequelize.STRING(700),
         allowNull: true,
       },
-      userId: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
