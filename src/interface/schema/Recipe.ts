@@ -1,12 +1,13 @@
 const recipeTypeDef = `
 type Recipe {
   id: ID!
+  userId: String
   key: String
   title: String!
   techniques: [Technique]!
   ingredients: [Ingredient]!
+  user: User
   description: String!
-  author: String!
   createdAt: String
   updatedAt: String
 }
@@ -16,18 +17,18 @@ input RecipeFindInput {
   key: String
   title: String
   description: String
-  author: String
-  page: Int = 1
+  userId: String
+  page: Int = 0
   limit: Int = 15
 }
 
 input RecipePayloadInput {
-  key: String
   title: String!
+  key: String!
   techniques: [RecipeTechniqueInput]!
   ingredients: [RecipeIngredientInput]!
-  description: String
-  author: String!
+  description: String!
+  userId: String!
 }
 
 type RecipeSaved {
@@ -35,7 +36,7 @@ type RecipeSaved {
   key: String
   title: String
   description: String
-  author: String
+  userId: String
 }
 `;
 export { recipeTypeDef as default };

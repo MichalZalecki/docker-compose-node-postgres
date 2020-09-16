@@ -1,16 +1,19 @@
 const ingredientTypeDef = `
 type Ingredient {
   id: ID!
+  user: User
   title: String
   key: String
   description: String
   createdAt: String
   updatedAt: String
+  recipes: [Recipe]
 }
 
 input IngredientPayloadInput{
-  title: String
-  key: String
+  title: String!
+  userId: String!
+  key: String!
   description: String
 } 
 

@@ -1,38 +1,32 @@
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable(
-    'Recipe',
+    'User',
     {
       id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        type: Sequelize.STRING,
         primaryKey: true,
         unique: true,
         allowNull: false,
       },
-      key: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      title: {
+      email: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-      description: {
-        type: Sequelize.STRING(700),
         allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
         allowNull: false,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
-        allowNull: true,
       },
     },
-    { tableName: 'Recipe' },
+    { tableName: 'User' },
   ),
 
-  down: (queryInterface) => queryInterface.dropTable('Recipe'),
+  down: (queryInterface) => queryInterface.dropTable('User'),
 };

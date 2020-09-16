@@ -18,7 +18,7 @@ const dummyRecipe = {
   key: 'bread',
   title: 'bread',
   description: 'put all the stuff',
-  author: 'myself',
+  userId: 'myssdfsdfdsfelf',
   techniques: [],
   ingredients: [],
 }
@@ -65,7 +65,7 @@ describe('Test the Recipe service', () => {
         key: dummyRecipe.key,
         title: dummyRecipe.title,
         description: dummyRecipe.description,
-        author: dummyRecipe.author,
+        userId: dummyRecipe.userId,
         ingredients: ingredietsCreated.map((i) => ({ id: i.id!, amount: 200 })),
         techniques: techniquesCreated.map((technique) => ({
           id: technique.id!,

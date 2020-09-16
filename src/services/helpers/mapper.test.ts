@@ -5,7 +5,7 @@ const recipe1 = {
   key: 'bread',
   title: 'bread',
   description: 'put all the stuff',
-  author: 'myself',
+  userId: 'myself',
   updatedAt: new Date(),
   createdAt: new Date(),
   ingredients: [],
@@ -17,7 +17,7 @@ const recipe2 = {
   key: 'bread',
   title: 'bread',
   description: 'put all the stuff',
-  author: 'myself',
+  userId: 'myself',
   updatedAt: new Date(),
   createdAt: new Date(),
   ingredients: [
@@ -76,19 +76,14 @@ describe('Mappers should work', () => {
 
   test('should map find and pagination params', async () => {
     const mapped = mapQueryParams(queryParams, ['title', 'description', 'duration'], ['limit', 'page']);
-    // @ts-ignore
     expect(mapped.findParams.description).toBeDefined();
-    // @ts-ignore
     expect(mapped.findParams.description).toBeDefined();
-    // @ts-ignore
     expect(mapped.paginationParams.limit).toBeDefined();
   });
 
   test('should map find and pagination params', async () => {
     const mapped = mapQueryParams({}, ['title', 'description', 'duration'], ['limit', 'page']);
-    // @ts-ignore
     expect(mapped.findParams).toEqual({});
-    // @ts-ignore
     expect(mapped.paginationParams).toEqual({});
   });
 });

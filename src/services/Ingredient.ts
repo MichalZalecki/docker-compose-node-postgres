@@ -2,7 +2,7 @@ import { DBInterface } from '../typings/DbInterface'
 import { IngredientAttributes } from '../models/Ingredient'
 import ErrorGenerator from '../error'
 
-export interface ingredientFindParams extends Partial<IngredientAttributes> {}
+export interface IngredientFindParams extends Partial<IngredientAttributes> {}
 
 export default class Ingredient {
   private db: DBInterface
@@ -11,7 +11,7 @@ export default class Ingredient {
     this.db = db
   }
 
-  async find(params?: ingredientFindParams, paramInJoinTable?: any): Promise<IngredientAttributes[]> {
+  async find(params?: IngredientFindParams): Promise<IngredientAttributes[]> {
     try {
       const ingredientFound = await this.db.Ingredient.findAll({
         where: params,
