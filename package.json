@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "How to setup Node.js and Postgres with Docker",
   "main": "index.js",
+  "engines": {
+    "node": "v12.16.3"
+  },
   "scripts": {
     "dev": "concurrently \"npm run build:watch\" \"npm run start:dev\"",
     "start:dev": "nodemon dist/src/",
