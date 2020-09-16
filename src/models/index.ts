@@ -7,12 +7,12 @@ import { RecipeTechniqueFactory } from './RecipeTechnique';
 import { TechniqueFactory } from './Technique';
 import { UserFactory } from './User';
 import getEnv from '../helpers/getEnv';
-import { Env } from '../typings/Env';
+import { Config, Env } from '../typings/Env';
 
 const createModels = (sequelizeConfig: Env): DBInterface => {
   const {
     database, username, password, dialect, host,
-  } = sequelizeConfig[getEnv()];
+  } = sequelizeConfig[getEnv()] as Config;
   function getSequelizeParams() {
     if (process.env.NODE_ENV === 'production') {
       return new Sequelize(process.env.DATABASE_URL as string, { dialectOptions: 'postgres', logging: true });
