@@ -1,7 +1,7 @@
 const recipeTypeDef = `
 type Technique {
   id: ID!
-  user: [User]
+  user: User
   recipes: [Recipe]
   title: String
   key: String

@@ -3,15 +3,16 @@ import { types, ErrorType } from './types';
 interface ErrorInterface extends Error {}
 export type errorTypes = 'Server.internal' | 'Authentication.rejected' | 'Validation.rejected' | 'Default'
 
-export default class ErrorGenerator {
-  message?: string
+export default class ErrorGenerator extends Error {
+  message: string
 
   type?: errorTypes
 
   stack?: string
 
-  constructor(type?: errorTypes, error?: ErrorInterface) {
-    this.message = error?.message;
+  constructor(type: errorTypes, error?: ErrorInterface) {
+    super()
+    this.message = error?.message || type
     this.type = type;
     this.stack = error?.stack;
   }

@@ -2,31 +2,15 @@ import { Context, Args } from './typings'
 
 export default {
   createIngredients(parent: any, args: Args, { service }: Context) {
-    try {
-      return service.ingredient.create(args.ingredientsPayload)
-    } catch (e) {
-      console.log(e)
-    }
+    return service.ingredient.create(args.ingredientsPayload)
   },
   createRecipe(parent: any, args: Args, { service }: Context) {
-    try {
-      return service.recipe.create(args.recipePayload)
-    } catch (e) {
-      console.log(e)
-    }
+    return service.recipe.create(args.recipePayload)
   },
   createTechniques(parent: any, args: Args, { service }: Context) {
-    try {
-      return service.technique.create(args.techniquesPayload)
-    } catch (e) {
-      console.log(e)
-    }
+    return service.technique.create(args.techniquesPayload)
   },
   registerOrLoginUser(parent: any, args: Args, { service }: Context) {
-    try {
-      return service.user.createIfNotExists(args.userPayload)
-    } catch (e) {
-      console.log(e)
-    }
+    return service.user.createIfNotExists(args.userPayload)
   },
 }

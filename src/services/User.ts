@@ -41,7 +41,6 @@ export default class User {
       const newUser = await this.db.User.create(user)
       return newUser.get({plain: true})
     } catch (e) {
-      console.log(e)
       throw new ErrorGenerator('Server.internal', e).type
     }
   }

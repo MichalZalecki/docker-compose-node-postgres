@@ -60,7 +60,7 @@ export const TechniqueFactory = (
     Technique.belongsToMany(models.Recipe, {
       through: models.RecipeTechnique,
       foreignKey: 'techniqueId',
-      as: 'techniques',
+      as: 'recipes',
       otherKey: 'recipeId',
     });
   };
