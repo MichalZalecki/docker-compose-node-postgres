@@ -17,6 +17,7 @@ export interface IngredientAttributes {
   userId?: string
   createdAt?: Date
   updatedAt?: Date
+  imageSrc: string
 }
 
 export interface IngredientInstance
@@ -74,6 +75,10 @@ export const IngredientFactory = (
     updatedAt: {
       type: DataTypes.DATE,
     },
+    imageSrc: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    }
   };
 
   const Ingredient = sequelize.define<IngredientInstance, IngredientAttributes>('Ingredient', attributes, {

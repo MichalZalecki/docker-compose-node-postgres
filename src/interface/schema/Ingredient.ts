@@ -3,6 +3,7 @@ type Ingredient {
   id: ID!
   user: User
   title: String
+  imageSrc: String
   key: String
   description: String
   createdAt: String
@@ -15,6 +16,7 @@ input IngredientPayloadInput{
   userId: String!
   key: String!
   description: String
+  imageSrc: String
 } 
 
 input RecipeIngredientInput {
