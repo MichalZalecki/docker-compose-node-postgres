@@ -1,6 +1,7 @@
 import { DBInterface } from '../typings/DbInterface'
 import { TechniqueAttributes } from '../models/Technique'
 import ErrorGenerator from '../error'
+import { mapQueryParams } from './helpers/mapper'
 
 export interface TechniqueFindParams extends Partial<Omit<TechniqueAttributes, 'videoLink'>> {}
 
@@ -16,10 +17,17 @@ export default class Technique {
     }
   }
 
-  async find(params?: TechniqueFindParams): Promise<TechniqueFindParams[]> {
+  async find(params: TechniqueFindParams): Promise<TechniqueFindParams[]> {
+    const { findParams, paginationParams } = mapQueryParams(
+      params,
+      ['id', 'key', 'title', 'description', 'userId'],
+      ['limit', 'page']
+    )
     try {
       const techniquesFound = await this.db.Technique.findAll({ 
-        where: params, 
+        where: findParams,
+        limit: paginationParams.limit,
+        offset: paginationParams.limit && paginationParams.page && paginationParams.limit * paginationParams.page,
         include: [
         {
           model: this.db.Recipe,

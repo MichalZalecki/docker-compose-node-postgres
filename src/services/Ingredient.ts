@@ -1,6 +1,7 @@
 import { DBInterface } from '../typings/DbInterface'
 import { IngredientAttributes } from '../models/Ingredient'
 import ErrorGenerator from '../error'
+import { mapQueryParams } from './helpers/mapper'
 
 export interface IngredientFindParams extends Partial<IngredientAttributes> {}
 
@@ -16,10 +17,17 @@ export default class Ingredient {
     }
   }
 
-  async find(params?: IngredientFindParams): Promise<IngredientAttributes[]> {
+  async find(params: IngredientFindParams): Promise<IngredientAttributes[]> {
+    const { findParams, paginationParams } = mapQueryParams(
+      params,
+      ['id', 'key', 'title', 'description', 'userId'],
+      ['limit', 'page']
+    )
     try {
       const ingredientFound = await this.db.Ingredient.findAll({
-        where: params,
+        where: findParams,
+        limit: paginationParams.limit,
+        offset: paginationParams.limit && paginationParams.page && paginationParams.limit * paginationParams.page,
         include: [
           {
             model: this.db.Recipe,

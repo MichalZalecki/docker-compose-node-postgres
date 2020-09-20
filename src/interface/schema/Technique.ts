@@ -23,6 +23,16 @@ input TechniquePayloadInput{
   standardTemperature: Float
 } 
 
+input TechniqueFindInput {
+  id: ID
+  key: String
+  title: String
+  description: String
+  userId: String
+  page: Int = 0
+  limit: Int = 15
+}
+
 input RecipeTechniqueInput {
   id: ID!
   duration: Float!

@@ -19,6 +19,16 @@ input IngredientPayloadInput{
   imageSrc: String
 } 
 
+input IngredientFindInput {
+  id: ID
+  key: String
+  title: String
+  description: String
+  userId: String
+  page: Int = 0
+  limit: Int = 15
+}
+
 input RecipeIngredientInput {
   id: ID!
   amount: Float!
