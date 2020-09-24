@@ -1,4 +1,9 @@
 const recipeTypeDef = `
+type TechniquesData{
+  data: [Technique]
+  count: Int
+}
+
 type Technique {
   id: ID!
   user: User

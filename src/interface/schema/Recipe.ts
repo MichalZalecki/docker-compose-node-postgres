@@ -1,4 +1,9 @@
 const recipeTypeDef = `
+type RecipesData{
+  data: [Recipe]
+  count: Int
+}
+
 type Recipe {
   id: ID!
   userId: String

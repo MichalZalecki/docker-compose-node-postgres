@@ -4,7 +4,10 @@ import ErrorGenerator from '../error'
 import { mapQueryParams } from './helpers/mapper'
 
 export interface TechniqueFindParams extends Partial<Omit<TechniqueAttributes, 'videoLink'>> {}
-
+interface TechniquesData{
+  data: TechniqueAttributes[]
+  count: number
+}
 export default class Technique {
   private db: DBInterface
   private eagerAttributes: {
@@ -17,14 +20,14 @@ export default class Technique {
     }
   }
 
-  async find(params: TechniqueFindParams): Promise<TechniqueFindParams[]> {
+  async find(params: TechniqueFindParams): Promise<TechniquesData> {
     const { findParams, paginationParams } = mapQueryParams(
       params,
       ['id', 'key', 'title', 'description', 'userId'],
       ['limit', 'page']
     )
     try {
-      const techniquesFound = await this.db.Technique.findAll({ 
+      const techniquesFound = await this.db.Technique.findAndCountAll({ 
         where: findParams,
         limit: paginationParams.limit,
         offset: paginationParams.limit && paginationParams.page && paginationParams.limit * paginationParams.page,
@@ -36,7 +39,7 @@ export default class Technique {
         }
       ],
     })
-      return techniquesFound.map((el) => el.get({ plain: true }))
+      return {data: techniquesFound.rows.map((el) => el.get({ plain: true })), count: techniquesFound.count}
     } catch (e) {
       throw new ErrorGenerator('Server.internal', e).type
     }

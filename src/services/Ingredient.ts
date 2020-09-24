@@ -4,6 +4,10 @@ import ErrorGenerator from '../error'
 import { mapQueryParams } from './helpers/mapper'
 
 export interface IngredientFindParams extends Partial<IngredientAttributes> {}
+interface IngredientsData{
+  data: IngredientAttributes[]
+  count: number
+}
 
 export default class Ingredient {
   private db: DBInterface
@@ -17,14 +21,14 @@ export default class Ingredient {
     }
   }
 
-  async find(params: IngredientFindParams): Promise<IngredientAttributes[]> {
+  async find(params: IngredientFindParams): Promise<IngredientsData> {
     const { findParams, paginationParams } = mapQueryParams(
       params,
       ['id', 'key', 'title', 'description', 'userId'],
       ['limit', 'page']
     )
     try {
-      const ingredientFound = await this.db.Ingredient.findAll({
+      const ingredientFound = await this.db.Ingredient.findAndCountAll({
         where: findParams,
         limit: paginationParams.limit,
         offset: paginationParams.limit && paginationParams.page && paginationParams.limit * paginationParams.page,
@@ -36,7 +40,8 @@ export default class Ingredient {
           }
         ],
       })
-      return ingredientFound.map((el) => el.get({ plain: true }))
+
+      return {data: ingredientFound.rows.map((el) => el.get({ plain: true })), count: ingredientFound.count}
     } catch (e) {
       throw new Error(e)
     }
