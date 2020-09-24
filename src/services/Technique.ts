@@ -30,6 +30,7 @@ export default class Technique {
       const techniquesFound = await this.db.Technique.findAndCountAll({ 
         where: findParams,
         limit: paginationParams.limit,
+        order: [["createdAt", 'DESC']],
         offset: paginationParams.limit && paginationParams.page && paginationParams.limit * paginationParams.page,
         include: [
         {

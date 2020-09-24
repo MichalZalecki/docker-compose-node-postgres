@@ -30,6 +30,7 @@ export default class Ingredient {
     try {
       const ingredientFound = await this.db.Ingredient.findAndCountAll({
         where: findParams,
+        order: [["createdAt", 'DESC']],
         limit: paginationParams.limit,
         offset: paginationParams.limit && paginationParams.page && paginationParams.limit * paginationParams.page,
         include: [

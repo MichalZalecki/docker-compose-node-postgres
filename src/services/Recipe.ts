@@ -71,6 +71,7 @@ export default class Recipe {
       )
       const recipesFound = await this.db.Recipe.findAndCountAll({
         where: findParams,
+        order: [["createdAt", 'DESC']],
         limit: paginationParams.limit,
         offset: paginationParams.limit && paginationParams.page && paginationParams.limit * paginationParams.page,
         include: [
