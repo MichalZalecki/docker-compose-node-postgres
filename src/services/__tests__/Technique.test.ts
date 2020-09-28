@@ -32,9 +32,9 @@ describe('Test the Technique service', () => {
   test('should find all ingredients', async () => {
     const technique = new Technique(db)
     await technique.create([dummyTechnique, dummyTechnique])
-    const ingredietsFound = await technique.find()
-    expect(ingredietsFound.length).toBe(2)
-    expect(ingredietsFound[0]).toHaveProperty('id')
+    const ingredietsFound = await technique.find({})
+    expect(ingredietsFound.data.length).toBe(2)
+    expect(ingredietsFound.data[0]).toHaveProperty('id')
   })
 
   test('should find filter ingredients by title', async () => {
@@ -42,7 +42,7 @@ describe('Test the Technique service', () => {
     let differentIng = { ...dummyTechnique, title: 'cane' }
     await technique.create([dummyTechnique, dummyTechnique, differentIng])
     const ingredietsFound = await technique.find({ title: 'cane' })
-    expect(ingredietsFound.length).toBe(1)
-    expect(ingredietsFound[0]).toHaveProperty('title', 'cane')
+    expect(ingredietsFound.data.length).toBe(1)
+    expect(ingredietsFound.data[0]).toHaveProperty('title', 'cane')
   })
 })

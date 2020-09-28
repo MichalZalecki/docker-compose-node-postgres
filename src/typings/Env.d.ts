@@ -5,6 +5,7 @@ export interface Config {
   host: string
   dialect: string
   operatorsAliases: boolean
+  logging: boolean
 }
 
 interface ProdEnv {

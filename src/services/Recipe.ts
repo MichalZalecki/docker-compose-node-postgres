@@ -11,8 +11,8 @@ export interface RecipeFindParams extends Partial<RecipeAttributes> {
   page?: number
   limit?: number
 }
-interface RecipesData{
-  data?: RecipeMappedToApi[]
+export interface RecipesData{
+  data: RecipeMappedToApi[]
   count: number
 }
 export interface RecipeFromDB extends Omit<Partial<RecipeAttributes>, 'ingredients' | 'techniques'> {
