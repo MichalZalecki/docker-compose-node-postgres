@@ -10,13 +10,7 @@ I've put together an article which explains most of the code from this repo: [Do
 
     docker-compose up --build
 
-## Test
+## Useful Commands
 
-```sh
-curl http://localhost:8080/ping
-# {"environment":"development","database":"up"}
-```
-
-## WARNING
-
-Don't keep `.env` file in the repo. It's here as it makes demo example simpler.
+Connect to the database running into container
+docker exec -it postgres-db psql -U postgres
