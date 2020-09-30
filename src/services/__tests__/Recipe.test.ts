@@ -70,7 +70,7 @@ describe('Test the Recipe service', () => {
         ingredients: ingredietsCreated.map((i) => ({ id: i.id!, amount: 200 })),
         techniques: techniquesCreated.map((technique) => ({
           id: technique.id!,
-          duration: technique.description!,
+          duration: technique.duration!,
           idealTemperature: technique.standardTemperature!,
         })),
       })

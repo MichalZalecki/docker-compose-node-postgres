@@ -5,12 +5,13 @@
     "database": "postgres",
     "host": "host.docker.internal",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "logging": true
   },
   "test": {
     "username": "postgres",
     "password": "password",
-    "database": "postgres-test",
+    "database": "postgres",
     "host": "host.docker.internal",
     "dialect": "postgres",
     "operatorsAliases": false,
