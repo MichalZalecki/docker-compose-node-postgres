@@ -23,8 +23,8 @@ function mapTechnique(technique: techniqueFromDB[]) {
   }));
 }
 
-export function mapRecipe(recipe: RecipeFromDB | any): RecipeMappedToApi | null {
-  if (!recipe) return null;
+export function mapRecipe(recipe: RecipeFromDB | any): RecipeMappedToApi {
+  if (!recipe) null;
   return {
     ...recipe,
     ingredients: mapIngredient(recipe.ingredients),

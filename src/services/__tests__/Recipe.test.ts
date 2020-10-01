@@ -1,4 +1,4 @@
-import Recipe from '../Recipe'
+import Recipe, { RecipesData } from '../Recipe'
 import Ingredient from '../Ingredient'
 import Technique from '../Technique'
 
@@ -12,6 +12,7 @@ const dummyIngredient = {
   key: 'Flour',
   title: 'flour',
   description: 'white dust',
+  imageSrc: "https://ciao.png"
 }
 
 const dummyRecipe = {
@@ -69,7 +70,7 @@ describe('Test the Recipe service', () => {
         ingredients: ingredietsCreated.map((i) => ({ id: i.id!, amount: 200 })),
         techniques: techniquesCreated.map((technique) => ({
           id: technique.id!,
-          duration: technique.description!,
+          duration: technique.duration!,
           idealTemperature: technique.standardTemperature!,
         })),
       })
@@ -81,15 +82,10 @@ describe('Test the Recipe service', () => {
 
   test('should find all the Recipes', async () => {
     const recipe = new Recipe(db)
-    let foundRecipes: any
-    try {
-      foundRecipes = await recipe.find({})
-    } catch (e) {
-      console.log(e)
-    }
-    expect(foundRecipes[0]).toHaveProperty('title')
-    expect(foundRecipes[0]).toHaveProperty('id')
-    expect(foundRecipes[0]).toHaveProperty('ingredients')
-    expect(foundRecipes[0].techniques[0]).toHaveProperty('duration')
+    const foundRecipes = await recipe.find({})
+    expect(foundRecipes.data[0]).toHaveProperty('title')
+    expect(foundRecipes.data[0]).toHaveProperty('id')
+    expect(foundRecipes.data[0]).toHaveProperty('ingredients')
+    expect(foundRecipes.data[0].techniques[0]).toHaveProperty('duration')
   })
 })

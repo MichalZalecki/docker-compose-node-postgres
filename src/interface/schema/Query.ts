@@ -1,8 +1,8 @@
 const queryTypeDef = `
 type Query {
-  recipes(query: RecipeFindInput): [Recipe]
-  ingredients(query: IngredientFindInput): [Ingredient]
-  techniques(query: TechniqueFindInput): [Technique]
+  recipes(query: RecipeFindInput): RecipesData
+  ingredients(query: IngredientFindInput): IngredientsData
+  techniques(query: TechniqueFindInput): TechniquesData
   user(query: UserFindInput): User
 }
 `;

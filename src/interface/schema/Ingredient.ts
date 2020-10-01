@@ -1,4 +1,9 @@
 const ingredientTypeDef = `
+type IngredientsData {
+  data: [Ingredient]
+  count: Int
+}
+
 type Ingredient {
   id: ID!
   user: User

@@ -8,6 +8,7 @@ const dummyIngredient = {
   key: 'Flour',
   title: 'flour',
   description: 'white dust',
+  imageSrc: 'https://hello.png'
 }
 
 afterEach(async () => {
@@ -29,9 +30,9 @@ describe('Test the Ingredient service', () => {
   test('should find all ingredients', async () => {
     const ingredient = new Ingredient(db)
     await ingredient.create([dummyIngredient, dummyIngredient, dummyIngredient])
-    const ingredietsFound = await ingredient.find()
-    expect(ingredietsFound.length).toBe(3)
-    expect(ingredietsFound[0]).toHaveProperty('id')
+    const ingredietsFound = await ingredient.find({})
+    expect(ingredietsFound.data.length).toBe(3)
+    expect(ingredietsFound.data[0]).toHaveProperty('id')
   })
 
   test('should find filter ingredients by title', async () => {
@@ -39,7 +40,7 @@ describe('Test the Ingredient service', () => {
     let differentIng = { ...dummyIngredient, title: 'cane' }
     await ingredient.create([dummyIngredient, dummyIngredient, differentIng])
     const ingredietsFound = await ingredient.find({ title: 'cane' })
-    expect(ingredietsFound.length).toBe(1)
-    expect(ingredietsFound[0]).toHaveProperty('title', 'cane')
+    expect(ingredietsFound.data.length).toBe(1)
+    expect(ingredietsFound.data[0]).toHaveProperty('title', 'cane')
   })
 })

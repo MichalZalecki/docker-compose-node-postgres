@@ -1,0 +1,22 @@
+version: "3.2"
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: ./.Dockerfile
+    volumes:
+      - ./src:/usr/src/app/src
+    depends_on:
+      - postgres-db
+    ports:
+      - "4000:4000"
+
+  postgres-db:
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    container_name: postgres-db

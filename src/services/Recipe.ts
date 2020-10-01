@@ -11,7 +11,10 @@ export interface RecipeFindParams extends Partial<RecipeAttributes> {
   page?: number
   limit?: number
 }
-
+export interface RecipesData{
+  data: RecipeMappedToApi[]
+  count: number
+}
 export interface RecipeFromDB extends Omit<Partial<RecipeAttributes>, 'ingredients' | 'techniques'> {
   ingredients: ingredientFromDB[]
   techniques: techniqueFromDB[]
@@ -59,15 +62,16 @@ export default class Recipe {
     }
   }
 
-  async find(params: RecipeFindParams): Promise<(RecipeMappedToApi | null)[]> {
+  async find(params: RecipeFindParams): Promise<RecipesData> {
     try {
       const { findParams, paginationParams } = mapQueryParams(
         params,
         ['id', 'key', 'title', 'description', 'userId'],
         ['limit', 'page']
       )
-      const recipesFound = await this.db.Recipe.findAll({
+      const recipesFound = await this.db.Recipe.findAndCountAll({
         where: findParams,
+        order: [["createdAt", 'DESC']],
         limit: paginationParams.limit,
         offset: paginationParams.limit && paginationParams.page && paginationParams.limit * paginationParams.page,
         include: [
@@ -83,7 +87,9 @@ export default class Recipe {
           },
         ],
       })
-      return recipesFound.map((recipe) => mapRecipe(recipe.get({ plain: true })))
+      return {
+        data: (recipesFound.rows || []).map((recipe) => mapRecipe(recipe.get({ plain: true }))),
+        count: recipesFound.count}
     } catch (e) {
       throw Error(e)
     }

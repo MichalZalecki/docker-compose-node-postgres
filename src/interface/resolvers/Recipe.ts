@@ -1,19 +1,21 @@
 import { Context, Args } from './typings'
 
 export default {
-  ingredients(parent: any, args: Args, { service }: Context) {
+  async ingredients(parent: any, args: Args, { service }: Context) {
     const ingredientIds = parent.ingredients.map((ingredient: any)=> {
       return ingredient.RecipeIngredient.ingredientId
     })
 
-    return service.ingredient.find({id: ingredientIds})
+    const ingredients = await service.ingredient.find({id: ingredientIds})
+    return ingredients.data
   },
-  techniques(parent: any, args: Args, { service }: Context) {
+  async techniques(parent: any, args: Args, { service }: Context) {
     const techniquesIds = parent.techniques.map((technique: any)=> {
       return technique.RecipeTechnique.techniqueId
     })
 
-    return service.technique.find({id: techniquesIds})
+    const techniques = await service.technique.find({id: techniquesIds})
+    return techniques.data
   },
   user(parent: any, args: Args, { service }: Context) {
     return service.user.find({id: parent.userId})

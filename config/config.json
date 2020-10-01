@@ -2,15 +2,16 @@
   "development": {
     "username": "postgres",
     "password": "password",
-    "database": "bread",
+    "database": "postgres",
     "host": "host.docker.internal",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "logging": true
   },
   "test": {
     "username": "postgres",
     "password": "password",
-    "database": "bread",
+    "database": "postgres",
     "host": "host.docker.internal",
     "dialect": "postgres",
     "operatorsAliases": false,
