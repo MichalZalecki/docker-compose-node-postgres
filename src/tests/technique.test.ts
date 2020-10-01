@@ -70,7 +70,7 @@ export const createTechnique = async ()=>{
   return response.data.createTechniques[0]
 }
 
-describe('=== TECHNIQUES MUTATIONS', () => {
+describe('=== TECHNIQUES CREATE MUTATION', () => {
   test('should create 1 technique', async ()=> {
     const technique = await createTechnique()
     expect(technique).toHaveProperty('id')

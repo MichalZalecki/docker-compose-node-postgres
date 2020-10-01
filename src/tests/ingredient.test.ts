@@ -70,7 +70,7 @@ export const createIngredient = async ()=>{
   return response.data.createIngredients[0]
 }
 
-describe('=== INGREDIENTS MUTATIONS', () => {
+describe('=== INGREDIENTS CREATE MUTATION', () => {
   test('should create 1 ingredient', async ()=> {
     const ingredient = await createIngredient()
     expect(ingredient).toHaveProperty('id')

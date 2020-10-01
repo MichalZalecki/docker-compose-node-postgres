@@ -59,6 +59,30 @@ export const CREATE_RECIPE = gql`
   }
 `
 
+export const GET_RECIPES = gql`
+query {
+  recipes(query:{limit: 2, page:0}) {
+    count
+    data{
+      title
+      techniques {
+        title
+        duration
+        recipes {
+          id
+        }
+      }
+      ingredients {
+        title
+        recipes {
+          id
+        }
+      }
+    }
+  }
+}
+`
+
 const createRecipe = async () => {
   const ingredient = await createIngredient()
   const technique = await createTechnique()
@@ -75,7 +99,7 @@ const createRecipe = async () => {
   return recipe?.data?.createRecipe
 }
 
-describe('=== RECIPE MUTATION ===', () => {
+describe('=== CREATE RECIPE MUTATION ===', () => {
   test('recipe should be created with success', async ()=> {
     const recipe = await createRecipe()
     expect(recipe).toHaveProperty('id')
@@ -87,10 +111,14 @@ describe('=== RECIPE MUTATION ===', () => {
 
 describe('=== RECIPE QUERY ===', () => {
   test('recipe should be queried with success', async ()=> {
-    const recipe = await createRecipe()
-    expect(recipe).toHaveProperty('id')
-    expect(recipe).toHaveProperty('title')
-    expect(recipe).toHaveProperty('key')
-    expect(recipe).toHaveProperty('description')
+    await createRecipe()
+    await createRecipe()
+    await createRecipe()
+
+    const recipe = await client.query({query: GET_RECIPES})
+    expect(recipe.data.recipes.count).toBe(3)
+    expect(recipe.data.recipes.data).toHaveLength(2)
+    expect(recipe.data.recipes.data[0].ingredients).toHaveLength(1)
+    expect(recipe.data.recipes.data[0].techniques[0].recipes[0]).toHaveProperty('id')
   })
 });
