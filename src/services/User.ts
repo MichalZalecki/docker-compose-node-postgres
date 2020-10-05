@@ -23,13 +23,14 @@ export default class User {
 
       return UsersFound.get({plain: true})
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).type
+      throw new Error(e)
     }
   }
 
   async createIfNotExists(user: UserAttributes): Promise<UserAttributes> {
+    console.log(user)
     if (!user) {
-      throw new ErrorGenerator('Server.internal').type
+      throw new Error('User doesn\'t exist')
     }
 
     try {
@@ -41,7 +42,7 @@ export default class User {
       const newUser = await this.db.User.create(user)
       return newUser.get({plain: true})
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).type
+      throw new Error(e)
     }
   }
 }

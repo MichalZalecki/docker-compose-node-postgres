@@ -2,7 +2,6 @@ import 'cross-fetch/polyfill'
 import ApolloBost, {gql} from 'apollo-boost'
 import createModels from  '../models/index'
 import config from '../../config/config.json'
-import Recipe from '../services/Recipe'
 
 const db = createModels(config)
 
