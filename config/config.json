@@ -12,7 +12,7 @@
     "username": "postgres",
     "password": "password",
     "database": "postgres",
-    "host": "host.docker.internal",
+    "host": "localhost",
     "dialect": "postgres",
     "operatorsAliases": false,
     "logging": false
