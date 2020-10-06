@@ -13,9 +13,12 @@ services:
       - "4000:4000"
 
   postgres-db:
+    volumes:
+      - ./db-volume:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: postgres
       POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     image: postgres
     ports:
       - "5432:5432"

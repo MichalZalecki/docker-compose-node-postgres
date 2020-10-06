@@ -10,6 +10,7 @@ query {
   user(query:{id: "userId"}) {
     id
     name
+    email
   }
 }
 `
@@ -38,7 +39,7 @@ afterEach(async () => {
 
 export const registerOrLoginUser = async ()=>{
   const response = await client.mutate({mutation: REGISTER_OR_LOGIN_USER})
-  return response.data.user
+  return response.data.registerOrLoginUser
 }
 
 describe('=== USER CREATE MUTATION', () => {
@@ -49,12 +50,12 @@ describe('=== USER CREATE MUTATION', () => {
 });
 
 describe('=== INGREDIENTS QUERY ===', ()=>{
-  test('ingredients should be have a working pagination and counter', async ()=> {
+  test('user should be have id email and name', async ()=> {
     await registerOrLoginUser()
 
     const response = await client.query({query: QUERY_USER})
-    expect(response.data.registerOrLoginUser).toHaveProperty('id')
-    expect(response.data.registerOrLoginUser).toHaveProperty('email')
-    expect(response.data.registerOrLoginUser).toHaveProperty('name')
+    expect(response.data.user).toHaveProperty('id')
+    expect(response.data.user).toHaveProperty('email')
+    expect(response.data.user).toHaveProperty('name')
   })
 })

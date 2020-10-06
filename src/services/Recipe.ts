@@ -1,6 +1,5 @@
 import { DBInterface } from '../typings/DbInterface'
 import { RecipeAttributes } from '../models/Recipe'
-import ErrorGenerator from '../error'
 import { RecipeIngredientAttributes } from '../models/RecipeIngredient'
 import { RecipeTechniqueAttributes } from '../models/RecipeTechnique'
 import { mapRecipe, mapQueryParams } from './helpers/mapper'
@@ -97,7 +96,7 @@ export default class Recipe {
 
   async create(recipe: RecipeMappedToApi): Promise<RecipeAttributes> {
     if (!recipe) {
-      throw new ErrorGenerator('Validation.rejected')
+      throw new Error('Validation.rejected')
     }
     try {
       const newRecipe = await this.db.Recipe.create({

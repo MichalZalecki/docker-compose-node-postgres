@@ -1,6 +1,5 @@
 import { DBInterface } from '../typings/DbInterface'
 import { TechniqueAttributes } from '../models/Technique'
-import ErrorGenerator from '../error'
 import { mapQueryParams } from './helpers/mapper'
 
 export interface TechniqueFindParams extends Partial<Omit<TechniqueAttributes, 'videoLink'>> {}
@@ -42,20 +41,20 @@ export default class Technique {
     })
       return {data: techniquesFound.rows.map((el) => el.get({ plain: true })), count: techniquesFound.count}
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).type
+      throw new Error(e)
     }
   }
 
   async create(techniques: TechniqueAttributes[]): Promise<TechniqueAttributes[]> {
     if (!techniques || !techniques.length) {
-      throw new ErrorGenerator('Server.internal').type
+      throw new Error('No technique received')
     }
 
     try {
       const newTechnique = await this.db.Technique.bulkCreate(techniques)
       return newTechnique.map((el) => el.get({ plain: true }))
     } catch (e) {
-      throw new ErrorGenerator('Server.internal', e).type
+      throw new Error(e)
     }
   }
 }

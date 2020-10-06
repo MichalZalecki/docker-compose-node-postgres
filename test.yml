@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: ./.Dockerfile-test
-    volumes:
-      - ./src:/usr/src/app/src
     depends_on:
       - postgres-db
     ports:
@@ -14,8 +12,9 @@ services:
 
   postgres-db:
     environment:
-      POSTGRES_USER: postgres
       POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     image: postgres
     ports:
       - "5432:5432"

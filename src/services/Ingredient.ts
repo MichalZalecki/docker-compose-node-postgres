@@ -1,6 +1,5 @@
 import { DBInterface } from '../typings/DbInterface'
 import { IngredientAttributes } from '../models/Ingredient'
-import ErrorGenerator from '../error'
 import { mapQueryParams } from './helpers/mapper'
 
 export interface IngredientFindParams extends Partial<IngredientAttributes> {}
@@ -50,7 +49,7 @@ export default class Ingredient {
 
   async create(ingredients: IngredientAttributes[]): Promise<IngredientAttributes[]> {
     if (!ingredients || !ingredients.length) {
-      throw new ErrorGenerator('Validation.rejected')
+      throw new Error('Validation.rejected')
     }
 
     try {

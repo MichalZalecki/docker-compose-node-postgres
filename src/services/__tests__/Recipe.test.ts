@@ -33,14 +33,14 @@ const dummyTechnique = {
   videoLink: 'https://you.tu/243423dsdasddds/',
 }
 
-let ingredietsCreated: IngredientAttributes[]
+let ingredientsCreated: IngredientAttributes[]
 let techniquesCreated: TechniqueAttributes[]
 
 const ingredient = new Ingredient(db)
 const technique = new Technique(db)
 
 beforeAll(async () => {
-  ingredietsCreated = await ingredient.create([dummyIngredient, dummyIngredient, dummyIngredient])
+  ingredientsCreated = await ingredient.create([dummyIngredient, dummyIngredient, dummyIngredient])
   techniquesCreated = await technique.create([dummyTechnique])
 })
 
@@ -51,6 +51,11 @@ afterAll(async () => {
     cascade: true,
   })
   await db.Ingredient.destroy({
+    where: {},
+    truncate: true,
+    cascade: true,
+  })
+  await db.Technique.destroy({
     where: {},
     truncate: true,
     cascade: true,
@@ -67,7 +72,7 @@ describe('Test the Recipe service', () => {
         title: dummyRecipe.title,
         description: dummyRecipe.description,
         userId: dummyRecipe.userId,
-        ingredients: ingredietsCreated.map((i) => ({ id: i.id!, amount: 200 })),
+        ingredients: ingredientsCreated.map((i) => ({ id: i.id!, amount: 200 })),
         techniques: techniquesCreated.map((technique) => ({
           id: technique.id!,
           duration: technique.duration!,

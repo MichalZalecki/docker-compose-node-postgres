@@ -11,9 +11,7 @@ RUN npm install
 
 COPY . /usr/src/app
 
-RUN node_modules/.bin/sequelize db:migrate
-
-ENV NODE_ENV=development
+ENV NODE_ENV=test
 
 EXPOSE 4000
 
